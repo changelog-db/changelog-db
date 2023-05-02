@@ -1,9 +1,27 @@
 ;; -*- mode: lisp-interaction; lexical-binding: t; -*-
+(require 'dash)
+(require 'f)
+(require 'json)
 (defun ChangelogDB:markdown ()
   (save-excursion
     (goto-char (point-min))
     (when (re-search-forward "^Last updated: \\(.*\\)" nil t)
       (replace-match (format-time-string "%FT%T%z") nil nil nil 1))))
+(defun ChangelogDB:insert-folder (dir url)
+  "Insert entries for DIR, a folder of packages."
+  (interactive
+   (list (read-directory-name "Local folder of packages: ")
+         (read-string "Remote path of packages: ")))
+  (--each (f-directories dir)
+    (when (and (f-exists? (f-join it "package.json"))
+               (f-exists? (f-join it "CHANGELOG.md")))
+      (let ((data (json-read-file (f-join it "package.json"))))
+        (let-alist data
+          (unless .private
+            (insert (format "\"%s\": \"%s/%s\"\n"
+                            .name
+                            (f-slash url)
+                            (f-join (f-base it) "CHANGELOG.md")))))))))
 (defun ChangelogDB:yaml ()
   (when (file-exists-p "README.md")
     (with-current-buffer (find-file-noselect "README.md")
