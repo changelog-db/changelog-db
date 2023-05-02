@@ -6,15 +6,25 @@
       (replace-match (format-time-string "%FT%T%z") nil nil nil 1))))
 (defun ChangelogDB:yaml ()
   (when (file-exists-p "README.md")
-    (with-temp-file "README.md"
-      (insert-file-contents "README.md")
+    (with-current-buffer (find-file-noselect "README.md")
       (ChangelogDB:markdown)))
   (let ((old-point (point)))
-    (goto-char (point-min))
-    (when (eql ?\n (char-after))
-      (delete-char 1))
-    (while (search-forward "\n\n" nil t)
-      (replace-match "\n"))
+    (save-excursion
+      (goto-char (point-min))
+      (when (eql ?\n (char-after))
+        (delete-char 1)))
+    (save-excursion
+      (goto-char (point-min))
+      (while (search-forward "\n\n" nil t)
+        (replace-match "\n")))
+    (save-excursion
+      (goto-char (point-min))
+      (let ((count 0))
+        (while (re-search-forward "blob/\\(master\\|main\\)" nil t)
+          (cl-incf count)
+          (replace-match "-" nil nil nil 1))
+        (when (> count 0)
+          (message "Replaced %s blob/(master|main) mentions" count))))
     (sort-lines nil (point-min) (point-max))
     (goto-char old-point)))
 
