@@ -7,21 +7,29 @@
     (goto-char (point-min))
     (when (re-search-forward "^Last updated: \\(.*\\)" nil t)
       (replace-match (format-time-string "%FT%T%z") nil nil nil 1))))
-(defun ChangelogDB:insert-folder (dir url)
+(defun ChangelogDB:insert-folder (dir url same-one?)
   "Insert entries for DIR, a folder of packages."
   (interactive
-   (list (read-directory-name "Local folder of packages: ")
-         (read-string "Remote path of packages: ")))
+   (let ((same-one? (y-or-n-p "Do the packages share the same changelog URL? ")))
+     (list (read-directory-name "Local folder of packages: ")
+           (read-string (if same-one?
+                            "Changelog URL: "
+                          "Remote path of packages: "))
+           same-one?)))
+  (goto-char (point-max))
   (--each (f-directories dir)
     (when (and (f-exists? (f-join it "package.json"))
-               (f-exists? (f-join it "CHANGELOG.md")))
+               (or same-one? (f-exists? (f-join it "CHANGELOG.md"))))
       (let ((data (json-read-file (f-join it "package.json"))))
         (let-alist data
           (unless .private
-            (insert (format "\"%s\": \"%s/%s\"\n"
-                            .name
-                            (f-slash url)
-                            (f-join (f-base it) "CHANGELOG.md")))))))))
+            (insert
+             (if same-one?
+                 (format "\"%s\": \"%s\"\n" .name url)
+               (format "\"%s\": \"%s/%s\"\n"
+                       .name
+                       (f-slash url)
+                       (f-join (f-base it) "CHANGELOG.md"))))))))))
 (defun ChangelogDB:yaml ()
   (when (file-exists-p "README.md")
     (with-current-buffer (find-file-noselect "README.md")
