@@ -1,8 +1,10 @@
 # changelog-db
 
-Last updated: 2023-05-04T05:42:56+0900
+Last updated: 2023-05-04T13:49:08+0900
 
 A manual best-effort attempt at creating a third-party npm package name → changelog URL mapping.
+
+`false` represents "I've checked and it doesn't have a changelog".
 
 Scope:
 
