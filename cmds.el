@@ -52,7 +52,16 @@
         (when (> count 0)
           (message "Replaced %s blob/(master|main) mentions" count))))
     (sort-lines nil (point-min) (point-max))
+    (delete-duplicate-lines (point-min) (point-max))
     (goto-char old-point)))
+(let ((here (file-name-directory
+             (or load-file-name buffer-file-name))))
+  (defun ChangelogDB:add (pkg url)
+    (interactive "MPackage: \nMURL: ")
+    (let ((default-directory here))
+      (with-current-buffer (find-file-noselect "changelog-db.yaml")
+        (goto-char (point-max))
+        (insert (format "\"%s\": \"%s\"" pkg url))))))
 
 (defun ChangelogDB:dev-setup ()
   (pcase major-mode
