@@ -633,6 +633,8 @@
 "react-aria": "https://react-spectrum.adobe.com/releases"
 "react-aria-components": "https://react-spectrum.adobe.com/releases"
 "react-native": "https://github.com/facebook/react-native/blob/-/CHANGELOG.md"
+"react-native-paper": "https://github.com/callstack/react-native-paper/releases"
+"react-native-safe-area-context": "https://github.com/th3rdwave/react-native-safe-area-context/releases"
 "react-native-web": "https://github.com/necolas/react-native-web/releases"
 "sanitize.css": "https://github.com/csstools/sanitize.css/blob/-/CHANGELOG.md"
 "sass": "https://github.com/sass/dart-sass/blob/-/CHANGELOG.md"
