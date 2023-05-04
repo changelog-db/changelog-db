@@ -636,6 +636,7 @@
 "react-aria": "https://react-spectrum.adobe.com/releases"
 "react-aria-components": "https://react-spectrum.adobe.com/releases"
 "react-native": "https://github.com/facebook/react-native/blob/-/CHANGELOG.md"
+"react-native-ios-kit": "https://github.com/callstack/react-native-ios-kit/releases"
 "react-native-paper": "https://github.com/callstack/react-native-paper/releases"
 "react-native-safe-area-context": "https://github.com/th3rdwave/react-native-safe-area-context/releases"
 "react-native-sqlite-storage": "https://github.com/andpor/react-native-sqlite-storage/blob/-/CHANGELOG.md"

@@ -1,15 +1,16 @@
 # changelog-db
 
-Last updated: 2023-05-05T01:09:47+0900
+The missing `changelog` field in package.json.
 
-A manual best-effort attempt at creating a third-party npm package name → changelog URL mapping.
+PyPI has it, and it's great! The JavaScript ecosystem should have it as well.
+
+For now, here's a package changelog index. Manually collected (semi-automated with Emacs), best-effort, hopefully saves some time.
+
+Last updated: 2023-05-05T01:26:37+0900
+
+## etc.
 
 `false` represents "I've checked and it doesn't have a changelog".
-
-Scope:
-
-- other software registries
-  - [pypi](https://pypi.org/): already records it
 
 Monorepo GitHub releases: If I can find a search term to narrow it down to the package, I'll try to do so. If not, the release page is recorded as the changelog URL instead. Example of the latter would be Astro.
 
