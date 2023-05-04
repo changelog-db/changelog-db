@@ -1,6 +1,6 @@
 # changelog-db
 
-Last updated: 2023-05-04T17:13:27+0900
+Last updated: 2023-05-05T01:09:47+0900
 
 A manual best-effort attempt at creating a third-party npm package name → changelog URL mapping.
 
