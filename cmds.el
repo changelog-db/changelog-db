@@ -2,12 +2,21 @@
 (require 'dash)
 (require 'f)
 (require 'json)
+(defmacro ChangelogDB:with-file (file &rest body)
+  (declare (indent 1))
+  (let ((here (-some-> (or load-file-name buffer-file-name)
+                file-name-directory)))
+    `(let ((default-directory ,here))
+       (when (file-exists-p ,file)
+         (with-current-buffer (find-file-noselect ,file)
+           ,@body
+           (basic-save-buffer))))))
 (defun ChangelogDB:markdown ()
   (save-excursion
     (goto-char (point-min))
     (when (re-search-forward "^Last updated: \\(.*\\)" nil t)
       (replace-match (format-time-string "%FT%T%z") nil nil nil 1))))
-(defun ChangelogDB:insert-folder (dir url same-one?)
+(defun ChangelogDB:add-folder (dir url same-one?)
   "Insert entries for DIR, a folder of packages."
   (interactive
    (let ((same-one? (y-or-n-p "Do the packages share the same changelog URL? ")))
@@ -16,24 +25,24 @@
                             "Changelog URL: "
                           "Remote path of packages: "))
            same-one?)))
-  (goto-char (point-max))
-  (--each (f-directories dir)
-    (when (and (f-exists? (f-join it "package.json"))
-               (or same-one? (f-exists? (f-join it "CHANGELOG.md"))))
-      (let ((data (json-read-file (f-join it "package.json"))))
-        (let-alist data
-          (unless .private
-            (insert
-             (if same-one?
-                 (format "\"%s\": \"%s\"\n" .name url)
-               (format "\"%s\": \"%s/%s\"\n"
-                       .name
-                       (f-slash url)
-                       (f-join (f-base it) "CHANGELOG.md"))))))))))
+  (ChangelogDB:with-file "changelog-db.yaml"
+    (goto-char (point-max))
+    (--each (f-directories dir)
+      (when (and (f-exists? (f-join it "package.json"))
+                 (or same-one? (f-exists? (f-join it "CHANGELOG.md"))))
+        (let ((data (json-read-file (f-join it "package.json"))))
+          (let-alist data
+            (unless .private
+              (insert
+               (if same-one?
+                   (format "\"%s\": \"%s\"\n" .name url)
+                 (format "\"%s\": \"%s/%s\"\n"
+                         .name
+                         (f-slash url)
+                         (f-join (f-base it) "CHANGELOG.md")))))))))))
 (defun ChangelogDB:yaml ()
-  (when (file-exists-p "README.md")
-    (with-current-buffer (find-file-noselect "README.md")
-      (ChangelogDB:markdown)))
+  (ChangelogDB:with-file "README.md"
+    (ChangelogDB:markdown))
   (let ((old-point (point)))
     (save-excursion
       (goto-char (point-min))
@@ -54,14 +63,11 @@
     (sort-lines nil (point-min) (point-max))
     (delete-duplicate-lines (point-min) (point-max))
     (goto-char old-point)))
-(let ((here (file-name-directory
-             (or load-file-name buffer-file-name))))
-  (defun ChangelogDB:add (pkg url)
-    (interactive "MPackage: \nMURL: ")
-    (let ((default-directory here))
-      (with-current-buffer (find-file-noselect "changelog-db.yaml")
-        (goto-char (point-max))
-        (insert (format "\"%s\": \"%s\"" pkg url))))))
+(defun ChangelogDB:add (pkg url)
+  (interactive "MPackage: \nMURL: ")
+  (ChangelogDB:with-file "changelog-db.yaml"
+    (goto-char (point-max))
+    (insert (format "\"%s\": \"%s\"" pkg url))))
 
 (defun ChangelogDB:dev-setup ()
   (pcase major-mode
