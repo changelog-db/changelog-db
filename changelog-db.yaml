@@ -1,8 +1,10 @@
 "@adobe/react-spectrum": "https://react-spectrum.adobe.com/releases"
+"@astrojs/language-server": "https://github.com/withastro/language-tools/blob/-/packages/language-server/CHANGELOG.md"
 "@astrojs/mdx": "https://github.com/withastro/astro/releases?q=astrojs/mdx"
 "@astrojs/node": "https://github.com/withastro/astro/releases?q=astrojs/node"
 "@astrojs/sitemap": "https://github.com/withastro/astro/releases?q=astrojs/sitemap"
 "@astrojs/svelte": "https://github.com/withastro/astro/releases?q=astrojs/svelte"
+"@astrojs/ts-plugin": "https://github.com/withastro/language-tools/blob/-/packages/ts-plugin/CHANGELOG.md"
 "@babel/cli": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
 "@babel/code-frame": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
 "@babel/compat-data": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
@@ -456,6 +458,7 @@
 "@webpack-cli/info": "https://github.com/webpack/webpack-cli/blob/-/packages/info/CHANGELOG.md"
 "@webpack-cli/serve": "https://github.com/webpack/webpack-cli/blob/-/packages/serve/CHANGELOG.md"
 "astro": "https://github.com/withastro/astro/releases"
+"astro-vscode": "https://github.com/withastro/language-tools/blob/-/packages/vscode/CHANGELOG.md"
 "autoprefixer": "https://github.com/postcss/autoprefixer/blob/-/CHANGELOG.md"
 "babel-plugin-module-resolver": "https://github.com/tleunen/babel-plugin-module-resolver/blob/-/CHANGELOG.md"
 "babel-plugin-react-native-web": false
