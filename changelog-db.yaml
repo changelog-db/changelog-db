@@ -670,6 +670,7 @@
 "sanitize.css": "https://github.com/csstools/sanitize.css/blob/-/CHANGELOG.md"
 "sass": "https://github.com/sass/dart-sass/blob/-/CHANGELOG.md"
 "schema-utils": "https://github.com/webpack/schema-utils/blob/-/CHANGELOG.md"
+"sharp": "https://sharp.pixelplumbing.com/changelog"
 "sqlite3": "https://github.com/TryGhost/node-sqlite3/releases"
 "strip-css-comments": "https://github.com/sindresorhus/strip-css-comments/releases"
 "strip-json-comments": "https://github.com/sindresorhus/strip-json-comments/releases"
