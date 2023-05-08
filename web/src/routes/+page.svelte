@@ -11,6 +11,41 @@
   $: filtered = data.filter(([pkg, _url]) => pkg.includes(searchInput));
 </script>
 
+<svelte:head>
+  <title>ChangelogDB</title>
+  <meta
+    property="description"
+    value="An npm registry package changelog index. Manually collected, best-effort, hopefully saves some time."
+  />
+  <!-- Primary Meta Tags -->
+  <title>ChangelogDB</title>
+  <meta name="title" content="ChangelogDB" />
+  <meta
+    name="description"
+    content="An npm registry package changelog index. Manually collected, best-effort, hopefully saves some time."
+  />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://changelog-db.netlify.app/" />
+  <meta property="og:title" content="ChangelogDB" />
+  <meta
+    property="og:description"
+    content="An npm registry package changelog index. Manually collected, best-effort, hopefully saves some time."
+  />
+
+  <!-- Twitter -->
+  <meta property="twitter:creator" content="@kisaragi_hiu" />
+  <!-- <meta property="twitter:card" content="summary" /> -->
+  <!-- <meta property="twitter:image" content="" /> -->
+  <meta property="twitter:url" content="https://changelog-db.netlify.app/" />
+  <meta property="twitter:title" content="ChangelogDB" />
+  <meta
+    property="twitter:description"
+    content="An npm registry package changelog index. Manually collected, best-effort, hopefully saves some time."
+  />
+</svelte:head>
+
 <main class="w-[95%] max-w-[40rem] mx-auto my-16">
   <div class="prose">
     <h1>ChangelogDB</h1>
@@ -55,3 +90,6 @@
     {/if}
   {/each}
 </main>
+<footer class="text-center text-sm">
+  Built with Tailwind CSS, daisyUI, and SvelteKit.
+</footer>
