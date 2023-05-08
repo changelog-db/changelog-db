@@ -24,7 +24,9 @@
     (goto-char (point-max))
     (--each (f-directories dir)
       (when (and (f-exists? (f-join it "package.json"))
-                 (or same-one? (f-exists? (f-join it "CHANGELOG.md"))))
+                 (if same-one?
+                     (not (f-exists? (f-join it "CHANGELOG.md")))
+                   (f-exists? (f-join it "CHANGELOG.md"))))
         (let ((data (json-read-file (f-join it "package.json"))))
           (let-alist data
             (unless .private
@@ -59,6 +61,9 @@
 (defun ChangelogDB:add (pkg url)
   (interactive "MPackage: \nMURL: ")
   (ChangelogDB:with-file "changelog-db.yaml"
+    (goto-char (point-min))
+    (when (re-search-forward (format "^\"%s\"" pkg) nil t)
+      (user-error "%s is already present" pkg))
     (goto-char (point-max))
     (insert (format "\"%s\": \"%s\"" pkg url))))
 
