@@ -19,4 +19,8 @@ export default {
   },
 
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["pastel", "dracula"],
+    darkTheme: "dracula",
+  },
 };
