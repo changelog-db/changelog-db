@@ -11,11 +11,6 @@
          (with-current-buffer (find-file-noselect ,file)
            ,@body
            (basic-save-buffer))))))
-(defun ChangelogDB:markdown ()
-  (save-excursion
-    (goto-char (point-min))
-    (when (re-search-forward "^Last updated: \\(.*\\)" nil t)
-      (replace-match (format-time-string "%FT%T%z") nil nil nil 1))))
 (defun ChangelogDB:add-folder (dir url same-one?)
   "Insert entries for DIR, a folder of packages."
   (interactive
@@ -41,8 +36,6 @@
                          (f-slash url)
                          (f-join (f-base it) "CHANGELOG.md")))))))))))
 (defun ChangelogDB:yaml ()
-  (ChangelogDB:with-file "README.md"
-    (ChangelogDB:markdown))
   (let ((old-point (point)))
     (save-excursion
       (goto-char (point-min))
@@ -72,6 +65,4 @@
 (defun ChangelogDB:dev-setup ()
   (pcase major-mode
     ('yaml-mode
-     (add-hook 'before-save-hook #'ChangelogDB:yaml nil t))
-    ('markdown-mode
-     (add-hook 'before-save-hook #'ChangelogDB:markdown nil t))))
+     (add-hook 'before-save-hook #'ChangelogDB:yaml nil t))))

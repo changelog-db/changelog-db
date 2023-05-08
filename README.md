@@ -6,7 +6,6 @@ PyPI has it, and it's great! The JavaScript ecosystem should have it as well.
 
 For now, here's a package changelog index. Manually collected (semi-automated with Emacs), best-effort, hopefully saves some time.
 
-Last updated: 2023-05-09T02:59:32+0900
 
 ## etc.
 
