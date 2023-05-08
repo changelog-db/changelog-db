@@ -85,7 +85,10 @@
   {#each filtered as [pkg, url] (pkg)}
     {#if url}
       <div class="flex w-full justify-between items-center space-x-1 h-12">
-        <span class="w-7/12 truncate">{pkg}</span>
+        <a
+          class="w-7/12 truncate underline"
+          href="https://npmjs.com/package/{pkg}">{pkg}</a
+        >
         <a class="w-5/12 truncate underline" href={url} target="_blank"
           >{truncateURL(url)}</a
         >
