@@ -8,8 +8,6 @@ For now, here's a package changelog index. Manually collected (semi-automated wi
 
 ## Roadmap
 
-- Website
-- Prominently displayed entry count
 - Emacs command
 - Shell command
 
@@ -17,7 +15,7 @@ For now, here's a package changelog index. Manually collected (semi-automated wi
 
 `false` represents "I've checked and it doesn't have a changelog".
 
-Monorepo GitHub releases: If I can find a search term to narrow it down to the package, I'll try to do so. If not, the release page is recorded as the changelog URL instead. Example of the latter would be Astro.
+Monorepo GitHub releases: If I can find a search term to narrow it down to the package, I'll try to do so. If not, the release page is recorded as the changelog URL instead.
 
 GitHub path links: [use `-` to refer to *the default branch*](https://stackoverflow.com/questions/64726262/is-there-a-stable-url-to-always-get-the-default-branch-in-github).
 
@@ -25,4 +23,4 @@ We track the latest changelog, as the main use is for people looking for what's 
 
 ## License
 
-CC-0.
+CC0.
