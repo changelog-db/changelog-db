@@ -55,7 +55,10 @@
       well.
     </p>
     <p>
-      For now, here's a package changelog index. Manually collected
+      For now, here's a package changelog index. <a
+        href="https://github.com/changelog-db/changelog-db/blob/-/changelog-db.yaml"
+        target="_blank">Manually collected</a
+      >
       (semi-automated with Emacs), best-effort, hopefully saves some time.
     </p>
   </div>

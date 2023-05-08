@@ -7,6 +7,9 @@
     h1 {
       @apply text-4xl font-[300] mb-4;
     }
+    a {
+      @apply underline;
+    }
     p {
       @apply my-2;
     }
