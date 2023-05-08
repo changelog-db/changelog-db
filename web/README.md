@@ -1,1 +1,1 @@
-See the parent README.
+See [the parent README](../README.md).

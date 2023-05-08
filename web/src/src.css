@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .prose {
+    h1 {
+      @apply text-4xl font-[300] mb-4;
+    }
+    p {
+      @apply my-2;
+    }
+  }
+}
