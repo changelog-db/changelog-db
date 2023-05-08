@@ -4,7 +4,6 @@
   const count = data.length;
 
   function truncateURL(url) {
-    console.log(url);
     return url.replace(/^https?:\/\//, "");
   }
 
