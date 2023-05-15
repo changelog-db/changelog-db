@@ -9,7 +9,20 @@ const count = data.length;
 export default component$(() => {
   const searchInput = useSignal("");
   const filtered = useComputed$(() => {
-    return data.filter(([pkg, _url]) => pkg.includes(searchInput.value));
+    const query = searchInput.value;
+    let value = data
+      .filter(([pkg, _url]) => pkg.includes(query))
+      .sort(([aPkg], [bPkg]) => {
+        // Put prefix matches first
+        if (query.length > 0) {
+          const a = aPkg.startsWith(query);
+          const b = bPkg.startsWith(query);
+          if (a && !b) return -1;
+          if (b && !a) return 1;
+        }
+        return aPkg < bPkg ? -1 : 1;
+      });
+    return value;
   });
   return (
     <main class="mx-auto my-16 w-[95%] max-w-[40rem]">
@@ -56,7 +69,7 @@ export default component$(() => {
       <input
         type="search"
         placeholder={`Search ${count} entries`}
-        class="input input-bordered mb-4 mt-4 w-full"
+        class="input input-bordered my-4 w-full"
         bind:value={searchInput}
       />
       <ul>
