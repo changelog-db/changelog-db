@@ -59,18 +59,21 @@
     (delete-duplicate-lines (point-min) (point-max))
     (goto-char old-point)))
 (defun ChangelogDB:add (pkg url)
-  (interactive "MPackage: \nMURL: ")
-  (setq pkg (string-trim pkg)
-        url (string-trim url))
-  (ChangelogDB:with-file "changelog-db.yaml"
-    (goto-char (point-min))
-    (when (re-search-forward (format "^\"%s\"" pkg) nil t)
-      (user-error "%s is already present" pkg))
-    (goto-char (point-max))
-    (insert
-     (if (equal url "")
-         (format "\"%s\": false" pkg)
-       (format "\"%s\": \"%s\"" pkg url)))))
+  (interactive
+   (list (read-string "Package (use comma to specify multiple): ")
+         (read-string "URL: ")))
+  (setq url (string-trim url))
+  (dolist (pkg (split-string pkg "," t))
+    (setq pkg (string-trim pkg))
+    (ChangelogDB:with-file "changelog-db.yaml"
+      (goto-char (point-min))
+      (when (re-search-forward (format "^\"%s\"" pkg) nil t)
+        (user-error "%s is already present" pkg))
+      (goto-char (point-max))
+      (insert
+       (if (equal url "")
+           (format "\"%s\": false" pkg)
+         (format "\"%s\": \"%s\"" pkg url))))))
 
 (defun ChangelogDB:dev-setup ()
   (pcase major-mode
