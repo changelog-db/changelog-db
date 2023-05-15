@@ -50,9 +50,10 @@
     (save-excursion
       (goto-char (point-min))
       (let ((count 0))
-        (while (re-search-forward "blob/\\(master\\|main\\)" nil t)
+        (while (re-search-forward "\\(tree\\|blob\\)/\\(master\\|main\\)" nil t)
           (cl-incf count)
-          (replace-match "-" nil nil nil 1))
+          (replace-match "blob" nil nil nil 1)
+          (replace-match "-" nil nil nil 2))
         (when (> count 0)
           (message "Replaced %s blob/(master|main) mentions" count))))
     (sort-lines nil (point-min) (point-max))
