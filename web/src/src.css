@@ -3,12 +3,17 @@
 @tailwind utilities;
 
 @layer utilities {
+  .link {
+    @apply underline;
+    text-underline-offset: 2px;
+    @apply transition duration-100 hover:opacity-60;
+  }
   .prose {
     h1 {
       @apply mb-4 text-4xl font-[300];
     }
     a {
-      @apply underline;
+      @apply link;
     }
     p {
       @apply my-2;

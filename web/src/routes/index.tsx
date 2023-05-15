@@ -1,13 +1,10 @@
 import { component$, useSignal, useComputed$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { SiNpm } from "@qwikest/icons/simpleicons";
 
 import rawData from "../../../changelog-db.yaml";
 const data: [string, string][] = Object.entries(rawData);
 const count = data.length;
-
-function truncateURL(url: string) {
-  return url.replace(/^https?:\/\//, "");
-}
 
 export default component$(() => {
   const searchInput = useSignal("");
@@ -37,7 +34,7 @@ export default component$(() => {
       <p class="mt-4">
         A project by{" "}
         <a
-          class="text-blue-400"
+          class="link text-blue-400"
           href="https://twitter.com/kisaragi_hiu"
           target="_blank"
         >
@@ -45,39 +42,46 @@ export default component$(() => {
         </a>
         {" — "}
         <a
-          class="underline"
+          class="link"
           href="https://www.buymeacoffee.com/kisaragihiu"
           target="_blank"
         >
           help pay for my rent
         </a>
       </p>
+      <p class="prose my-4 text-xs">
+        <a href="https://github.com/changelog-db/changelog-db">Built with</a>{" "}
+        Tailwind CSS, daisyUI, and Qwik.
+      </p>
       <input
         type="search"
-        placeholder={`Search ${count} entries...`}
-        class="input input-bordered mb-4 mt-8 w-full"
+        placeholder={`Search ${count} entries`}
+        class="input input-bordered mb-4 mt-4 w-full"
         bind:value={searchInput}
       />
-      {filtered.value.map(([pkg, url]) => (
-        <>
-          {url && (
-            <div class="flex h-12 w-full items-center justify-between space-x-1">
-              <a
-                class="w-7/12 truncate underline"
-                href={`https://npmjs.com/package/${pkg}`}
-              >
-                {pkg}
-              </a>
-              <a class="w-5/12 truncate underline" href={url} target="_blank">
-                {truncateURL(url)}
-              </a>
-            </div>
-          )}
-        </>
-      ))}
-      <footer class="text-center text-sm">
-        Built with Tailwind CSS, daisyUI, and SvelteKit.
-      </footer>
+      <ul>
+        {filtered.value.map(([pkg, url]) => (
+          <>
+            {url && (
+              <li class="flex h-12 w-full items-center space-x-1">
+                <a
+                  class="link flex h-full w-11/12 items-center truncate"
+                  href={url}
+                >
+                  <span class="">{pkg}</span>
+                </a>
+                <a
+                  class="link h-full w-1/12 text-right text-2xl"
+                  href={`https://npmjs.com/package/${pkg}`}
+                  target="_blank"
+                >
+                  <SiNpm class="inline" />
+                </a>
+              </li>
+            )}
+          </>
+        ))}
+      </ul>
     </main>
   );
 });
