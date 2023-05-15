@@ -64,11 +64,8 @@ export default component$(() => {
           <>
             {url && (
               <li class="flex h-12 w-full items-center space-x-1">
-                <a
-                  class="link flex h-full w-11/12 items-center truncate"
-                  href={url}
-                >
-                  <span class="">{pkg}</span>
+                <a class="link flex h-full w-11/12 items-center" href={url}>
+                  <span class="truncate">{pkg}</span>
                 </a>
                 <a
                   class="link h-full w-1/12 text-right text-2xl"
