@@ -1,16 +1,24 @@
-dev:
-	npx vite dev
-
+dist: build
 build:
+	npx qwik build
+
+build.client:
 	npx vite build
 
-preview: build
-	(cd build && python -m http.server)
+build.types:
+	npx tsc --incremental --noEmit
 
-check:
-	npx svelte-kit sync
-	npx svelte-check --tsconfig ./tsconfig.json
+preview: dist
+	npx sirv dist
 
-check.watch:
-	npx svelte-kit sync
-	npx svelte-check --tsconfig ./tsconfig.json --watch
+dev:
+	npx vite --mode ssr
+
+dev.debug:
+	node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force
+
+fmt:
+	prettier --write .
+
+fmt.check:
+	npx prettier --check .

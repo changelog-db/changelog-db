@@ -1,21 +1,31 @@
 {
   "name": "web",
   "version": "0.0.1",
-  "private": true,
-  "devDependencies": {
-    "@rollup/plugin-yaml": "^4.0.1",
-    "@sveltejs/adapter-static": "^2.0.2",
-    "@sveltejs/kit": "^1.16.2",
-    "daisyui": "^2.51.6",
-    "prettier": "^2.8.8",
-    "prettier-plugin-svelte": "^2.10.0",
-    "svelte": "^3.59.1",
-    "svelte-check": "^3.3.2",
-    "tailwindcss": "^3.3.1",
-    "tslib": "^2.5.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.5"
-  },
   "packageManager": "pnpm@8.4.0",
-  "type": "module"
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "qwik build",
+    "build.client": "vite build",
+    "build.preview": "vite build --ssr src/entry.preview.tsx",
+    "build.server": "vite build -c adapters/static/vite.config.ts",
+    "build.types": "",
+    "qwik": "qwik"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.4",
+    "prettier": "2.8.8"
+  },
+  "//": "This is a static app with zero runtime dependencies, so I'm treating build dependencies as normal dependencies. I don't need to install prettier on Netlify.",
+  "dependencies": {
+    "@builder.io/qwik": "^1.1.2",
+    "@builder.io/qwik-city": "^1.1.2",
+    "daisyui": "^2.51.6",
+    "sirv-cli": "^2.0.2",
+    "tailwindcss": "^3.3.2",
+    "typescript": "5.0.4",
+    "vite": "4.3.5",
+    "vite-tsconfig-paths": "4.2.0",
+    "@rollup/plugin-yaml": "^4.1.0"
+  }
 }

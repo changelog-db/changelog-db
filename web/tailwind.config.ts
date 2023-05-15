@@ -9,7 +9,7 @@ const cjkFallbackSans = [
   "Malgun Gothic",
 ];
 export default {
-  content: ["./src/**/*.{html,js,svelte,ts}"],
+  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
 
   theme: {
     fontFamily: {
