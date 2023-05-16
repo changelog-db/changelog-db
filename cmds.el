@@ -2,6 +2,7 @@
 (require 'dash)
 (require 'f)
 (require 'json)
+(require 's)
 (defmacro ChangelogDB:with-file (file &rest body)
   (declare (indent 1))
   (let ((here (-some-> (or load-file-name buffer-file-name)
@@ -63,7 +64,9 @@
   (interactive
    (list (read-string "Package (use comma to specify multiple): ")
          (read-string "URL: ")))
-  (setq url (string-trim url))
+  (setq url (->> url
+                 (s-replace "https://npmjs.com/package/" "")
+                 string-trim))
   (dolist (pkg (split-string pkg "," t))
     (setq pkg (string-trim pkg))
     (ChangelogDB:with-file "changelog-db.yaml"
