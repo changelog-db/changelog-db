@@ -4,8 +4,8 @@
   "private": true,
   "size-limit": [
     {
-      "path": "build/_app",
-      "limit": "300 KB",
+      "path": "build/_app/**/*.br",
+      "limit": "50 KB",
       "gzip": false
     }
   ],

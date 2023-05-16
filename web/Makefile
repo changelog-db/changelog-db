@@ -1,5 +1,7 @@
+.PHONY: build
 build:
 	npx vite build
+	npx size-limit
 
 preview: build
 	npx sirv build
