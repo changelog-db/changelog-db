@@ -1,9 +1,8 @@
-dist: build
 build:
 	npx vite build
 
-preview: dist
-	npx sirv dist
+preview: build
+	npx sirv build
 
 dev:
 	npx vite dev

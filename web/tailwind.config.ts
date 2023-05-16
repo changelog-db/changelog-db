@@ -1,8 +1,6 @@
 const cjkFallbackSans = [
   "'Noto Sans CJK TC'",
   "'Noto Sans TC'",
-  "'jf-openhuninn'",
-  "'jf-openhuninn-1.1'",
   "Microsoft Jhenghei",
   "Microsoft Yahei",
   "Meiryo",
