@@ -9,7 +9,7 @@ const cjkFallbackSans = [
   "Malgun Gothic",
 ];
 export default {
-  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{html,js,ts,svelte}"],
 
   theme: {
     fontFamily: {
@@ -20,6 +20,10 @@ export default {
 
   plugins: [require("daisyui")],
   daisyui: {
+    // Because daisyui prints straight to stdout and ends up in the
+    // output of prettier-plugin-tailwindcss.
+    // Surely it should be printing to stderr?
+    logs: false,
     themes: ["pastel", "dracula"],
     darkTheme: "dracula",
   },

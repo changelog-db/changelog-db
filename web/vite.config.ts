@@ -1,10 +1,7 @@
+import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
-import { qwikVite } from "@builder.io/qwik/optimizer";
-import { qwikCity } from "@builder.io/qwik-city/vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 import yaml from "@rollup/plugin-yaml";
 
-export default defineConfig(() => ({
-  clearScreen: false,
-  plugins: [qwikCity(), qwikVite(), tsconfigPaths(), yaml()],
-}));
+export default defineConfig({
+  plugins: [sveltekit(), yaml()],
+});
