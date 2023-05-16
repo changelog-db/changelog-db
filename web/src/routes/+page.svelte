@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { LogoNpm } from "carbon-icons-svelte";
+  import LogoNpm from "carbon-icons-svelte/lib/LogoNpm.svelte";
+  import clsx from "clsx";
+  import { browser } from "$app/environment";
   import rawData from "../../../changelog-db.yaml";
   const data: [string, string][] = Object.entries(rawData);
   const count = data.length;
@@ -84,9 +86,13 @@
   </p>
   <input
     type="search"
-    placeholder="Search {count} entries"
-    class="input-bordered input my-4 w-full"
+    placeholder={browser ? `Search ${count} entries` : "Loading"}
+    class={clsx(
+      "input-bordered input my-4 w-full transition",
+      browser || "animate-pulse"
+    )}
     bind:value={searchInput}
+    disabled={!browser}
   />
   <ul class="divide-y divide-neutral-content/25">
     {#each filtered as [pkg, url] (pkg)}
