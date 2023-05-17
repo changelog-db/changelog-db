@@ -55,17 +55,18 @@ URL can contain %s which stands for the package name."
   (setq pkgs (->> pkgs
                   (s-replace "https://npmjs.com/package/" "")
                   string-trim))
-  (dolist (pkg (split-string pkgs " " t))
-    (setq pkg (string-trim pkg))
-    (ChangelogDB:with-file "changelog-db.yaml"
+  (ChangelogDB:with-file "changelog-db.yaml"
+    (dolist (pkg (split-string pkgs " " t))
+      (setq pkg (string-trim pkg))
       (goto-char (point-min))
       (when (re-search-forward (format "^\"%s\"" pkg) nil t)
-        (user-error "%s is already present" pkg))
+        ;; Don't error, keep going
+        (message "%s is already present" pkg))
       (goto-char (point-max))
       (insert
        (if (equal url "")
-           (format "\"%s\": false" pkg)
-         (format "\"%s\": \"%s\""
+           (format "\"%s\": false\n" pkg)
+         (format "\"%s\": \"%s\"\n"
                  pkg
                  ;; If URL doesn't have a placeholder, it's just
                  ;; returned as-is.
@@ -95,14 +96,19 @@ URL can contain %s which stands for the package name."
           (replace-match "-" nil nil nil 2))
         (when (> count 0)
           (message "Replaced %s blob/(master|main) mentions" count))))
+    ;; The next block would be useless if we're at the final newline,
+    ;; so back out of there.
+    (when (and (eobp) (eql (char-before) ?\n))
+      (forward-line -1))
+    ;; Try to stay on the same text
     (let ((current-line (buffer-substring-no-properties
                          (line-beginning-position)
                          (line-end-position))))
       (sort-lines nil (point-min) (point-max))
       (delete-duplicate-lines (point-min) (point-max))
-      (or (progn
-            (goto-char (point-min))
-            (search-forward current-line nil t))
+      (goto-char (point-min))
+      (or (prog1 (search-forward current-line nil t)
+            (beginning-of-line))
           (goto-char old-point)))))
 (defun ChangelogDB:dev-setup ()
   (pcase major-mode
