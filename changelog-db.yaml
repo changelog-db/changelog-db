@@ -1170,8 +1170,8 @@
 "webpack-cli": "https://github.com/webpack/webpack-cli/blob/-/CHANGELOG.md"
 "webpack-dev-middleware": "https://github.com/webpack/webpack-dev-middleware/blob/-/CHANGELOG.md"
 "webpack-dev-server": "https://github.com/webpack/webpack-dev-server/blob/-/CHANGELOG.md"
-"zone.js": "https://github.com/angular/angular/blob/-/packages/zone/CHANGELOG.md"
 "wrap-ansi": "https://github.com/chalk/wrap-ansi/releases"
 "write-json-file": "https://github.com/sindresorhus/write-json-file/releases"
 "yoctodelay": "https://github.com/sindresorhus/yoctodelay/releases"
 "yoga-layout": false
+"zone.js": "https://github.com/angular/angular/blob/-/packages/zone.js/CHANGELOG.md"
