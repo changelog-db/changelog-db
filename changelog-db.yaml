@@ -1077,7 +1077,7 @@
 "p-do-whilst": "https://github.com/sindresorhus/p-do-whilst/releases"
 "p-each-series": "https://github.com/sindresorhus/p-each-series/releases"
 "p-event": "https://github.com/sindresorhus/p-event/releases"
-"p-every": "https://github.com/sindresorhus/p-every/releases"
+"p-every": false
 "p-filter": "https://github.com/sindresorhus/p-filter/releases"
 "p-forever": "https://github.com/sindresorhus/p-forever/releases"
 "p-if": "https://github.com/sindresorhus/p-if/releases"
