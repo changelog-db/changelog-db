@@ -13,6 +13,8 @@ For now, here's a package changelog index. Manually collected (semi-automated wi
 
 ## etc.
 
+Top 1000 npm packages by number of dependents, number of dependencies, or pagerank score: [anvaka/npm rank](https://gist.github.com/anvaka/8e8fa57c7ee1350e3491).
+
 `false` represents "I've checked and it doesn't have a changelog".
 
 Monorepo GitHub releases: If I can find a search term to narrow it down to the package, I'll try to do so. If not, the release page is recorded as the changelog URL instead.
@@ -21,7 +23,9 @@ GitHub path links: [use `-` to refer to *the default branch*](https://stackoverf
 
 We track the latest changelog, as the main use is for people looking for what's changed between their current version and a newly released version. For example, [node-config](https://github.com/node-config/node-config) uses GitHub Releases for new releases but has a History.md for releases before a certain point; only the former is tracked.
 
-When there are multiple equivalent files, usually I prefer CHANGELOG.md over GitHub Releases as the former is usually easier to read. Docusaurus is an example of an exception: the CHANGELOG.md is so big GitHub gave up rendering it on my device, so I used GitHub Releases instead.
+Precedence: changelog in the project's website > changelog file > GitHub Releases or equivalent for other forges. This is roughly going by how pleasant the reading experience is. Keep in mind that the one actually being actively updated always has the most precedence.
+
+There are exceptions, for example, Docusaurus's CHANGELOG.md is so big GitHub gave up rendering it on my device, so I used GitHub Releases instead.
 
 ## License
 
