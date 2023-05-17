@@ -1043,7 +1043,7 @@
 "moment": "https://github.com/moment/moment/blob/-/CHANGELOG.md"
 "nanodelay": "https://github.com/ai/nanodelay/blob/-/CHANGELOG.md"
 "nanoid": "https://github.com/ai/nanoid/blob/-/CHANGELOG.md"
-"netlify-cli": "https://github.com/netlify/cli/blob/-/CHANGELOG.md"
+"netlify-cli": "https://github.com/netlify/cli/releases"
 "neutrino": "https://github.com/neutrinojs/neutrino/blob/-/CHANGELOG.md"
 "next": "https://github.com/vercel/next.js/releases"
 "ngx-ow": false
