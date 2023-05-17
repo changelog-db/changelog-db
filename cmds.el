@@ -6,6 +6,8 @@
 (require 's)
 (require 'git)
 
+(defvar ChangelogDB::pkg-history)
+(defvar ChangelogDB::url-history)
 (defmacro ChangelogDB:with-file (file &rest body)
   (declare (indent 1))
   (let ((here (-some-> (or load-file-name buffer-file-name)
@@ -41,7 +43,40 @@
                          .name
                          (f-slash url)
                          (f-join (f-base it) "CHANGELOG.md")))))))))))
-(defun ChangelogDB:yaml ()
+(defun ChangelogDB:add (pkgs url)
+  "Add entries from PKGS to URL.
+URL can contain %s which stands for the package name."
+  (interactive
+   (let ((pkgs (read-string "Package (space-separated): "
+                            nil 'ChangelogDB::pkg-history)))
+     (list pkgs
+           (read-string (format "Changelog URL for %s: " pkgs)
+                        nil 'ChangelogDB::url-history))))
+  (setq pkgs (->> pkgs
+                  (s-replace "https://npmjs.com/package/" "")
+                  string-trim))
+  (dolist (pkg (split-string pkgs " " t))
+    (setq pkg (string-trim pkg))
+    (ChangelogDB:with-file "changelog-db.yaml"
+      (goto-char (point-min))
+      (when (re-search-forward (format "^\"%s\"" pkg) nil t)
+        (user-error "%s is already present" pkg))
+      (goto-char (point-max))
+      (insert
+       (if (equal url "")
+           (format "\"%s\": false" pkg)
+         (format "\"%s\": \"%s\""
+                 pkg
+                 ;; If URL doesn't have a placeholder, it's just
+                 ;; returned as-is.
+                 (format url pkg)))))))
+(defun ChangelogDB:clone (url)
+  "Git clone URL so that we can run `ChangelogDB:add-folder' on it."
+  (interactive "MURL: ")
+  (let ((git-repo temporary-file-directory))
+    (git-run "clone" "--depth" "1" url)))
+
+(defun ChangelogDB::yaml ()
   (let ((old-point (point)))
     (save-excursion
       (goto-char (point-min))
@@ -69,50 +104,7 @@
             (goto-char (point-min))
             (search-forward current-line nil t))
           (goto-char old-point)))))
-(defun ChangelogDB:add-template (pkgs url-template)
-  "Add entries for PKGS, which is comma-separated.
-Each of PKGS will be associated with URL-TEMPLATE, with its name
-substituded in with `format'."
-  (interactive
-   (list (read-string "Packages (space-separated): ")
-         (read-string "URL Template (%s stands for the package's name): ")))
-  (setq url-template (string-trim url-template))
-  (ChangelogDB:with-file "changelog-db.yaml"
-    (dolist (pkg (split-string pkgs " " t))
-      (setq pkg (string-trim pkg))
-      (goto-char (point-max))
-      (insert
-       (if (equal url-template "")
-           (format "\"%s\": false" pkg)
-         (format "\"%s\": \"%s\"\n"
-                 pkg (format url-template pkg)))))))
-(defun ChangelogDB:add (pkg url)
-  (interactive
-   (let ((pkg (read-string "Package (space-separated): ")))
-     (list pkg
-           (read-string (format "Changelog URL for %s: " pkg)))))
-  (setq pkg (->> pkg
-                 (s-replace "https://npmjs.com/package/" "")
-                 string-trim))
-  (dolist (pkg (split-string pkg " " t))
-    (setq pkg (string-trim pkg))
-    (ChangelogDB:with-file "changelog-db.yaml"
-      (goto-char (point-min))
-      (when (re-search-forward (format "^\"%s\"" pkg) nil t)
-        (user-error "%s is already present" pkg))
-      (goto-char (point-max))
-      (insert
-       (if (equal url "")
-           (format "\"%s\": false" pkg)
-         (format "\"%s\": \"%s\"" pkg url))))))
-
-(defun ChangelogDB:clone (url)
-  "Git clone URL so that we can run `ChangelogDB:add-folder' on it."
-  (interactive "MURL: ")
-  (let ((git-repo temporary-file-directory))
-    (git-run "clone" "--depth" "1" url)))
-
 (defun ChangelogDB:dev-setup ()
   (pcase major-mode
     ('yaml-mode
-     (add-hook 'before-save-hook #'ChangelogDB:yaml nil t))))
+     (add-hook 'before-save-hook #'ChangelogDB::yaml nil t))))
