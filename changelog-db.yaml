@@ -798,7 +798,7 @@
 "boxen-cli": "https://github.com/sindresorhus/boxen-cli/releases"
 "c12": "https://github.com/unjs/c12/blob/-/CHANGELOG.md"
 "cac": "https://github.com/cacjs/cac/releases"
-"cache-conf": "https://github.com/sindresorhus/cache-conf/releases"
+"cache-conf": false
 "camelcase": "https://github.com/sindresorhus/camelcase/releases"
 "camelcase-keys": "https://github.com/sindresorhus/camelcase-keys/releases"
 "capture-website": "https://github.com/sindresorhus/capture-website/releases"
@@ -1149,7 +1149,7 @@
 "p-map-series": "https://github.com/sindresorhus/p-map-series/releases"
 "p-memoize": "https://github.com/sindresorhus/p-memoize/releases"
 "p-min-delay": "https://github.com/sindresorhus/p-min-delay/releases"
-"p-one": "https://github.com/sindresorhus/p-one/releases"
+"p-one": false
 "p-pipe": "https://github.com/sindresorhus/p-pipe/releases"
 "p-progress": "https://github.com/sindresorhus/p-progress/releases"
 "p-props": "https://github.com/sindresorhus/p-props/releases"
