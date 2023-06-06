@@ -7,6 +7,7 @@ preview: build
 	npx sirv build
 
 dev:
+	npx svelte-kit sync
 	npx vite dev
 
 fmt:

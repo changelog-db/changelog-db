@@ -2,6 +2,8 @@
   import LogoNpm from "carbon-icons-svelte/lib/LogoNpm.svelte";
   import clsx from "clsx";
   import { browser } from "$app/environment";
+  import { page } from "$lib/stores";
+  import Pages from "./Pages.svelte";
   import rawData from "../../../changelog-db.yaml";
   const data: [string, string][] = Object.entries(rawData);
   const count = data.length;
@@ -20,13 +22,12 @@
       return aPkg < bPkg ? -1 : 1;
     });
 
-  const pageSize = 20;
-  let page = 1;
-  $: maxPage = Math.ceil(filtered.length / pageSize);
-  $: pageStart = pageSize * (page - 1);
-  $: pageEnd = pageSize * page;
+  const pageSize = 100;
+  $: maxPage = Math.max(1, Math.ceil(filtered.length / pageSize));
+  $: pageStart = pageSize * ($page - 1);
+  $: pageEnd = pageSize * $page;
   // Reset page to 1 when `filtered` changes
-  $: filtered, (page = 1);
+  $: filtered, ($page = 1);
 </script>
 
 <svelte:head>
@@ -102,41 +103,32 @@
     bind:value={searchInput}
     disabled={!browser}
   />
-  <div id="pagination" class="join mb-4 flex justify-center">
-    <button
-      class={clsx("join-item btn", page <= 1 && "btn-disabled")}
-      on:click={() => {
-        page = Math.max(page - 1, 1);
-      }}>«</button
-    >
-    <button class="join-item btn w-[8ch]" on:click={() => (page = 1)}
-      >{page}/{maxPage}</button
-    >
-    <button
-      class={clsx("join-item btn", page >= maxPage && "btn-disabled")}
-      on:click={() => {
-        page = Math.min(page + 1, maxPage);
-      }}>»</button
-    >
-  </div>
-  <ul id="list" class="divide-y divide-neutral-content/25">
-    {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
-      {#if url}
-        <li class="flex h-12 w-full items-center space-x-1">
-          <a class="link flex h-full w-11/12 items-center" href={url}>
-            <span class="truncate">{pkg}</span>
-          </a>
-          <a
-            class="link flex h-full w-1/12 items-center text-center"
-            href="https://npmjs.com/package/{pkg}"
-            target="_blank"
-          >
-            <span>
-              <LogoNpm title="View {pkg} on npm" size={32} />
-            </span>
-          </a>
-        </li>
-      {/if}
-    {/each}
-  </ul>
+  {#if filtered.length > 0}
+    <Pages {maxPage} />
+    <ul id="list" class="divide-y divide-neutral-content/25">
+      {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
+        {#if url}
+          <li class="flex h-12 w-full items-center space-x-1">
+            <a class="link flex h-full w-11/12 items-center" href={url}>
+              <span class="truncate">{pkg}</span>
+            </a>
+            <a
+              class="link flex h-full w-1/12 items-center text-center"
+              href="https://npmjs.com/package/{pkg}"
+              target="_blank"
+            >
+              <span>
+                <LogoNpm title="View {pkg} on npm" size={32} />
+              </span>
+            </a>
+          </li>
+        {/if}
+      {/each}
+    </ul>
+    <Pages {maxPage} />
+  {:else}
+    <div class="my-4 text-center text-2xl font-bold text-neutral-content">
+      No matches!
+    </div>
+  {/if}
 </main>
