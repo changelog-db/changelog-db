@@ -13,6 +13,8 @@ For now, here's a package changelog index. Manually collected (semi-automated wi
 
 ## etc.
 
+`@types/*` are excluded.
+
 Top 1000 npm packages by number of dependents, number of dependencies, or pagerank score: [anvaka/npm rank](https://gist.github.com/anvaka/8e8fa57c7ee1350e3491).
 
 `false` represents "I've checked and it doesn't have a changelog".
