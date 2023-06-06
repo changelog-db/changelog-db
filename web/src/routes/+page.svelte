@@ -19,6 +19,14 @@
       }
       return aPkg < bPkg ? -1 : 1;
     });
+
+  const pageSize = 20;
+  let page = 1;
+  $: maxPage = Math.ceil(filtered.length / pageSize);
+  $: pageStart = pageSize * (page - 1);
+  $: pageEnd = pageSize * page;
+  // Reset page to 1 when `filtered` changes
+  $: filtered, (page = 1);
 </script>
 
 <svelte:head>
@@ -94,8 +102,25 @@
     bind:value={searchInput}
     disabled={!browser}
   />
-  <ul class="divide-y divide-neutral-content/25">
-    {#each filtered as [pkg, url] (pkg)}
+  <div id="pagination" class="join mb-4 flex justify-center">
+    <button
+      class={clsx("join-item btn", page <= 1 && "btn-disabled")}
+      on:click={() => {
+        page = Math.max(page - 1, 1);
+      }}>«</button
+    >
+    <button class="join-item btn w-[8ch]" on:click={() => (page = 1)}
+      >{page}/{maxPage}</button
+    >
+    <button
+      class={clsx("join-item btn", page >= maxPage && "btn-disabled")}
+      on:click={() => {
+        page = Math.min(page + 1, maxPage);
+      }}>»</button
+    >
+  </div>
+  <ul id="list" class="divide-y divide-neutral-content/25">
+    {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
       {#if url}
         <li class="flex h-12 w-full items-center space-x-1">
           <a class="link flex h-full w-11/12 items-center" href={url}>

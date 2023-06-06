@@ -8,6 +8,9 @@
     text-underline-offset: 2px;
     @apply transition duration-100 hover:opacity-60;
   }
+  .btn {
+    @apply no-animation;
+  }
   .prose {
     h1 {
       @apply mb-4 text-4xl font-[300];
