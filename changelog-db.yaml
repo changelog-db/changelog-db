@@ -672,6 +672,7 @@
 "@sveltejs/amp": "https://github.com/sveltejs/kit/blob/-/packages/amp/CHANGELOG.md"
 "@sveltejs/kit": "https://github.com/sveltejs/kit/blob/-/packages/kit/CHANGELOG.md"
 "@sveltejs/package": "https://github.com/sveltejs/kit/blob/-/packages/package/CHANGELOG.md"
+"@sveltejs/svelte-scroller": "https://github.com/sveltejs/svelte-scroller/blob/-/CHANGELOG.md"
 "@sveltejs/vite-plugin-svelte": "https://github.com/sveltejs/vite-plugin-svelte/blob/-/packages/vite-plugin-svelte/CHANGELOG.md"
 "@swc-node/core": "https://github.com/swc-project/swc-node/blob/-/packages/core/CHANGELOG.md"
 "@swc-node/integrate": "https://github.com/swc-project/swc-node/blob/-/packages/integrate/CHANGELOG.md"
@@ -1413,6 +1414,7 @@
 "svelte-legos": false
 "svelte-migrate": "https://github.com/sveltejs/kit/blob/-/packages/migrate/CHANGELOG.md"
 "svelte-preprocess": "https://github.com/sveltejs/svelte-preprocess/blob/-/CHANGELOG.md"
+"svelte-scrolling": "https://github.com/valmisson/svelte-scrolling/blob/-/CHANGELOG.md"
 "svelte-vscode": "https://github.com/sveltejs/language-tools/releases"
 "svelte2tsx": "https://github.com/sveltejs/language-tools/releases"
 "tailwindcss": "https://github.com/tailwindlabs/tailwindcss/blob/-/CHANGELOG.md"
