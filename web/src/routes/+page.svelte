@@ -8,7 +8,8 @@
   const data: [string, string][] = Object.entries(rawData);
   const count = data.length;
 
-  let searchInput = "";
+  let rawInput = "";
+  $: searchInput = rawInput.trim();
   $: filtered = data
     .filter(([pkg, _url]) => pkg.includes(searchInput))
     .sort(([aPkg], [bPkg]) => {
@@ -100,7 +101,7 @@
       "input-bordered input my-4 w-full transition",
       browser || "animate-pulse"
     )}
-    bind:value={searchInput}
+    bind:value={rawInput}
     disabled={!browser}
   />
   {#if filtered.length > 0}
