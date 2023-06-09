@@ -1,12 +1,12 @@
-import adapterStatic from "@sveltejs/adapter-static";
+import adapterNetlify from "@sveltejs/adapter-netlify";
 import { vitePreprocess } from "@sveltejs/kit/vite";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: vitePreprocess(),
   kit: {
-    adapter: adapterStatic({
-      precompress: true,
+    adapter: adapterNetlify({
+      edge: true,
     }),
   },
 };
