@@ -2,7 +2,7 @@
   import LogoNpm from "carbon-icons-svelte/lib/LogoNpm.svelte";
   import clsx from "clsx";
   import { browser } from "$app/environment";
-  import { page } from "$lib/stores";
+  import { currentPage } from "$lib/stores";
   import Pages from "./Pages.svelte";
   import rawData from "../../../changelog-db.yaml";
   const data: [string, string][] = Object.entries(rawData);
@@ -25,10 +25,10 @@
 
   const pageSize = 100;
   $: maxPage = Math.max(1, Math.ceil(filtered.length / pageSize));
-  $: pageStart = pageSize * ($page - 1);
-  $: pageEnd = pageSize * $page;
+  $: pageStart = pageSize * ($currentPage - 1);
+  $: pageEnd = pageSize * $currentPage;
   // Reset page to 1 when `filtered` changes
-  $: filtered, ($page = 1);
+  $: filtered, ($currentPage = 1);
 </script>
 
 <svelte:head>

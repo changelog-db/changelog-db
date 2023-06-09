@@ -1,7 +1,7 @@
 <script lang="ts">
   export let maxPage: number;
   import clsx from "clsx";
-  import { page } from "$lib/stores";
+  import { currentPage } from "$lib/stores";
 
   function top() {
     if (window) {
@@ -16,23 +16,23 @@
 
 <div id="pagination" class="join mb-4 flex justify-center">
   <button
-    class={clsx("join-item btn", $page <= 1 && "btn-disabled")}
+    class={clsx("join-item btn", $currentPage <= 1 && "btn-disabled")}
     on:click={() => {
-      $page = Math.max($page - 1, 1);
+      $currentPage = Math.max($currentPage - 1, 1);
       top();
     }}>«</button
   >
   <button
     class="join-item btn w-[8ch]"
     on:click={() => {
-      $page = 1;
+      $currentPage = 1;
       top();
-    }}>{$page}/{maxPage}</button
+    }}>{$currentPage}/{maxPage}</button
   >
   <button
-    class={clsx("join-item btn", $page >= maxPage && "btn-disabled")}
+    class={clsx("join-item btn", $currentPage >= maxPage && "btn-disabled")}
     on:click={() => {
-      $page = Math.min($page + 1, maxPage);
+      $currentPage = Math.min($currentPage + 1, maxPage);
       top();
     }}>»</button
   >
