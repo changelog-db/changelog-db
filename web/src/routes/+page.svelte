@@ -6,7 +6,6 @@
   import Pages from "./Pages.svelte";
   import rawData from "../../../changelog-db.yaml";
   const data: [string, string][] = Object.entries(rawData);
-  const count = data.length;
 
   let rawInput = "";
   $: searchInput = rawInput.trim();
@@ -96,7 +95,7 @@
   </p>
   <input
     type="search"
-    placeholder={browser ? `Search ${count} entries` : "Loading"}
+    placeholder={browser ? `Search ${data.length} entries` : "Loading"}
     class={clsx(
       "input-bordered input my-4 w-full transition",
       browser || "animate-pulse"
