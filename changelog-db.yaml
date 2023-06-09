@@ -907,6 +907,7 @@
 "create-svelte": "https://github.com/sveltejs/kit/blob/-/packages/create-svelte/CHANGELOG.md"
 "create-turbo": "https://github.com/vercel/turbo/releases"
 "create-vite": "https://github.com/vitejs/vite/blob/-/packages/create-vite/CHANGELOG.md"
+"cross-env": "https://github.com/kentcdodds/cross-env/releases"
 "crypto-hash": "https://github.com/sindresorhus/crypto-hash/releases"
 "css-blank-pseudo": "https://github.com/csstools/postcss-plugins/blob/-/plugins/css-blank-pseudo/CHANGELOG.md"
 "css-has-pseudo": "https://github.com/csstools/postcss-plugins/blob/-/plugins/css-has-pseudo/CHANGELOG.md"
