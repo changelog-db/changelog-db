@@ -3,11 +3,28 @@
   import clsx from "clsx";
   import { browser } from "$app/environment";
   import { currentPage } from "$lib/stores";
+  import { page } from "$app/stores";
   import Pages from "./Pages.svelte";
+
   import rawData from "../../../changelog-db.yaml";
   const data: [string, string][] = Object.entries(rawData);
 
-  let rawInput = "";
+  const url = $page.url;
+  let rawInput = url.searchParams.get("q") || "";
+
+  $: {
+    if (
+      url.searchParams.get("q") !== rawInput &&
+      typeof history !== "undefined"
+    ) {
+      if (rawInput === "") {
+        url.searchParams.delete("q");
+      } else {
+        url.searchParams.set("q", rawInput);
+      }
+      history.replaceState(null, "", url);
+    }
+  }
   $: searchInput = rawInput.trim();
   $: filtered = data
     .filter(([pkg, _url]) => pkg.includes(searchInput))
