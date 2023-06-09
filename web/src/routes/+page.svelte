@@ -127,8 +127,25 @@
     </ul>
     <Pages {maxPage} />
   {:else}
-    <div class="my-4 text-center text-2xl font-bold text-neutral-content">
-      No matches!
+    <div class="my-4 space-y-2 text-center text-neutral-content">
+      <h2 class="text-2xl font-bold">No matches!</h2>
+      <div>
+        Searching for <code class="text-primary">{searchInput}</code> on:
+      </div>
+      <ul class="space-y-2">
+        <li>
+          <a
+            class="out link text-secondary"
+            href="https://www.google.com/search?q={searchInput}">Google</a
+          >
+        </li>
+        <li>
+          <a
+            class="out link text-secondary"
+            href="https://www.npmjs.com/search?q={searchInput}">npm</a
+          >
+        </li>
+      </ul>
     </div>
   {/if}
 </main>

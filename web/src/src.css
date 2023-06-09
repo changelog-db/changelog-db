@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer utilities {
+  .out {
+    &:after {
+      content: "°";
+    }
+  }
   .link {
     @apply underline;
     text-underline-offset: 2px;
