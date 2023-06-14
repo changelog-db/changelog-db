@@ -901,6 +901,7 @@
 "core-js-compat": "https://github.com/zloirock/core-js/blob/-/CHANGELOG.md"
 "core-js-pure": "https://github.com/zloirock/core-js/blob/-/CHANGELOG.md"
 "cosmiconfig": "https://github.com/cosmiconfig/cosmiconfig/blob/-/CHANGELOG.md"
+"cpy": "https://github.com/sindresorhus/cpy/releases"
 "create-next-app": "https://github.com/vercel/next.js/releases"
 "create-qwik": "https://github.com/BuilderIO/qwik/releases"
 "create-remix": "https://github.com/remix-run/remix/blob/-/packages/create-remix/CHANGELOG.md"
