@@ -59,6 +59,10 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://changelog-db.netlify.app/" />
+  <meta
+    property="og:image"
+    content="https://changelog-db.netlify.app/og-image.png"
+  />
   <meta property="og:title" content="ChangelogDB" />
   <meta
     property="og:description"
@@ -67,9 +71,12 @@
 
   <!-- Twitter -->
   <meta property="twitter:creator" content="@kisaragi_hiu" />
-  <!-- <meta property="twitter:card" content="summary" /> -->
-  <!-- <meta property="twitter:image" content="" /> -->
+  <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://changelog-db.netlify.app/" />
+  <meta
+    property="twitter:image"
+    content="https://changelog-db.netlify.app/og-image.png"
+  />
   <meta property="twitter:title" content="ChangelogDB" />
   <meta
     property="twitter:description"
