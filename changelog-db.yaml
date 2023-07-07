@@ -1533,6 +1533,7 @@
 "postcss-zindex": "https://github.com/cssnano/cssnano/blob/-/packages/postcss-zindex/CHANGELOG.md"
 "preact": "https://github.com/preactjs/preact/releases"
 "prettier": "https://github.com/prettier/prettier/blob/-/CHANGELOG.md"
+"prettier-plugin-astro": "https://github.com/withastro/prettier-plugin-astro/releases"
 "prettier-plugin-svelte": "https://github.com/sveltejs/prettier-plugin-svelte/blob/-/CHANGELOG.md"
 "prettier-plugin-tailwindcss": "https://github.com/tailwindlabs/prettier-plugin-tailwindcss/blob/-/CHANGELOG.md"
 "pretty-bytes": "https://github.com/sindresorhus/pretty-bytes/releases"
