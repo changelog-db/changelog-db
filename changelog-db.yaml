@@ -1656,6 +1656,7 @@
 "trash": "https://github.com/sindresorhus/trash/releases"
 "trash-cli": "https://github.com/sindresorhus/trash-cli/releases"
 "tree-kill": "https://github.com/pkrumins/node-tree-kill#changelog"
+"ts-node": "https://github.com/TypeStrong/ts-node/releases"
 "tslib": "https://github.com/microsoft/tslib/releases"
 "tsup": "https://github.com/egoist/tsup/releases"
 "turbo": "https://github.com/vercel/turbo/releases"

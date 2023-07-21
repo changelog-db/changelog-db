@@ -133,7 +133,11 @@
       {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
         {#if url}
           <li class="flex h-12 w-full items-center space-x-1">
-            <a class="link flex h-full w-11/12 items-center" href={url}>
+            <a
+              class="link flex h-full w-11/12 items-center"
+              target="_blank"
+              href={url}
+            >
               <span class="truncate">{pkg}</span>
             </a>
             <a
