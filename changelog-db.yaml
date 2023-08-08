@@ -1632,7 +1632,7 @@
 "supabase-auth-helpers-qwik": "https://github.com/BuilderIO/qwik/releases"
 "superagent": "https://github.com/ladjs/superagent/releases"
 "supports-color": "https://github.com/chalk/supports-color/releases"
-"svelte": "https://github.com/sveltejs/svelte/blob/-/CHANGELOG.md"
+"svelte": "https://github.com/sveltejs/svelte/releases"
 "svelte-check": "https://github.com/sveltejs/language-tools/releases"
 "svelte-icons-pack": false
 "svelte-language-server": "https://github.com/sveltejs/language-tools/releases"
