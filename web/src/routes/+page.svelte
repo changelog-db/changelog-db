@@ -26,8 +26,11 @@
     }
   }
   $: searchInput = rawInput.trim();
+  $: tokens = searchInput.split(/\s+/);
   $: filtered = data
-    .filter(([pkg, _url]) => pkg.includes(searchInput))
+    .filter(([pkg, _url]) => {
+      return tokens.every((token) => pkg.includes(token));
+    })
     .sort(([aPkg], [bPkg]) => {
       // Put prefix matches first
       if (searchInput.length > 0) {
@@ -121,7 +124,7 @@
     type="search"
     placeholder={browser ? `Search ${data.length} entries` : "Loading"}
     class={clsx(
-      "input-bordered input my-4 w-full transition",
+      "input input-bordered my-4 w-full transition",
       browser || "animate-pulse"
     )}
     bind:value={rawInput}
