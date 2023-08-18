@@ -1,2 +1,2 @@
 [build]
-ignore = git diff --quiet HEAD HEAD~1 . ../changelog-db.yaml
+ignore = "git diff --quiet HEAD HEAD~1 . ../changelog-db.yaml"
