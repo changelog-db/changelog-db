@@ -1002,7 +1002,7 @@
 "ansi-regex": "https://github.com/chalk/ansi-regex/releases"
 "ansi-styles": "https://github.com/chalk/ansi-styles/releases"
 "art": false
-"astro": "https://github.com/withastro/astro/releases"
+"astro": "https://github.com/withastro/astro/blob/-/packages/astro/CHANGELOG.md"
 "astro-compressor": "https://github.com/sondr3/astro-compressor/blob/-/CHANGELOG.md"
 "astro-i18next": "https://github.com/yassinedoghri/astro-i18next/blob/-/CHANGELOG.md"
 "astro-vscode": "https://github.com/withastro/language-tools/blob/-/packages/vscode/CHANGELOG.md"
@@ -1642,6 +1642,7 @@
 "svelte-scrolling": "https://github.com/valmisson/svelte-scrolling/blob/-/CHANGELOG.md"
 "svelte-vscode": "https://github.com/sveltejs/language-tools/releases"
 "svelte2tsx": "https://github.com/sveltejs/language-tools/releases"
+"tailwind-merge": "https://github.com/dcastil/tailwind-merge/releases"
 "tailwindcss": "https://github.com/tailwindlabs/tailwindcss/blob/-/CHANGELOG.md"
 "terminal-image": "https://github.com/sindresorhus/terminal-image/releases"
 "terminal-image-cli": "https://github.com/sindresorhus/terminal-image-cli/releases"
