@@ -26,7 +26,7 @@
                             "Changelog URL: "
                           "Remote path of packages: "))
            same-one?)))
-  (ChangelogDB:with-file "changelog-db.yaml"
+  (ChangelogDB:with-file "changelog-db.data"
     (goto-char (point-max))
     (--each (f-directories dir)
       (when (and (f-exists? (f-join it "package.json"))
@@ -55,7 +55,7 @@ URL can contain %s which stands for the package name."
   (setq pkgs (->> pkgs
                   (s-replace "https://npmjs.com/package/" "")
                   string-trim))
-  (ChangelogDB:with-file "changelog-db.yaml"
+  (ChangelogDB:with-file "changelog-db.data"
     (dolist (pkg (split-string pkgs " " t))
       (setq pkg (string-trim pkg))
       (goto-char (point-min))
@@ -77,20 +77,63 @@ URL can contain %s which stands for the package name."
   (let ((git-repo temporary-file-directory))
     (git-run "clone" "--depth" "1" url)))
 
-(defun ChangelogDB::yaml ()
+(defun ChangelogDB::sort-data ()
+  "Sort the data fields.
+Comment lines remain attached to their next lines.
+
+Entries are sorted by keys only so that for plain keys, \"a\"
+come before \"a-\" as expected. A naive text sort would put \"a-:
+...\" before \"a: ...\" as the syntax character \":\" sorts after
+\"-\"."
+  (let ((inhibit-field-text-motion t)
+        (inhibit-message t))
+    (save-match-data
+      (goto-char (point-min))
+      (sort-subr
+       nil
+       ;; Going from the end of a record to the next record:
+       ;; The next line starts a new record
+       (lambda ()
+         (forward-line))
+       ;; Going from the start of a record to its end:
+       ;; The end of the line after skipping comment lines
+       (lambda ()
+         (while (looking-at "^[[:space:]]*#" t)
+           (forward-line))
+         (end-of-line))
+       ;; Going from the start of the record to the start of the key:
+       ;; Skip comment lines.
+       ;; (forward-line already stops at the beginning of line)
+       (lambda ()
+         (while (looking-at "^[[:space:]]*#" t)
+           (forward-line)))
+       ;; Going to end of the key from the start of the key:
+       ;; The end of the line or the end of the key.
+       (lambda ()
+         (if (search-forward ":" (pos-eol) t)
+             (forward-char -1)
+           (end-of-line)))))))
+(defun ChangelogDB::format-data ()
   (let ((old-point (point)))
+    ;; Remove leading newline
     (save-excursion
       (goto-char (point-min))
       (when (eql ?\n (char-after))
         (delete-char 1)))
+    ;; Remove duplicate newlines
     (save-excursion
       (goto-char (point-min))
       (while (search-forward "\n\n" nil t)
         (replace-match "\n")))
+    ;; Replace default branch names
     (save-excursion
       (goto-char (point-min))
       (let ((count 0))
-        (while (re-search-forward "\\(tree\\|blob\\)/\\(master\\|main\\|HEAD\\)" nil t)
+        (while (re-search-forward
+                (rx (group (or "tree" "blob"))
+                    "/"
+                    (group (or "master" "main" "HEAD")))
+                nil t)
           (cl-incf count)
           (replace-match "blob" nil nil nil 1)
           (replace-match "-" nil nil nil 2))
@@ -104,7 +147,7 @@ URL can contain %s which stands for the package name."
     (let ((current-line (buffer-substring-no-properties
                          (line-beginning-position)
                          (line-end-position))))
-      (sort-lines nil (point-min) (point-max))
+      (ChangelogDB::sort-data)
       (delete-duplicate-lines (point-min) (point-max))
       (goto-char (point-min))
       (or (prog1 (search-forward current-line nil t)
@@ -113,4 +156,6 @@ URL can contain %s which stands for the package name."
 (defun ChangelogDB:dev-setup ()
   (pcase major-mode
     ('yaml-mode
-     (add-hook 'before-save-hook #'ChangelogDB::yaml nil t))))
+     (add-hook 'before-save-hook #'ChangelogDB::format-data nil t)
+     (when (fboundp 'apheleia-mode)
+       (funcall #'apheleia-mode -1)))))

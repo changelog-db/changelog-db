@@ -1,3 +1,4 @@
+# -*- mode: yaml; -*-
 "@adobe/react-spectrum": "https://react-spectrum.adobe.com/releases"
 "@angular-devkit/architect": "https://github.com/angular/angular-cli/blob/-/CHANGELOG.md"
 "@angular-devkit/architect-cli": "https://github.com/angular/angular-cli/blob/-/CHANGELOG.md"
@@ -198,9 +199,9 @@
 "@babel/traverse": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
 "@babel/types": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
 "@builder.io/eslint-plugin-mitosis": "https://github.com/BuilderIO/mitosis/blob/-/packages/eslint-plugin/CHANGELOG.md"
-"@builder.io/html-to-figma": false
+"@builder.io/html-to-figma": none
 "@builder.io/mitosis": "https://github.com/BuilderIO/mitosis/blob/-/packages/core/CHANGELOG.md"
-"@builder.io/mitosis-cli": false
+"@builder.io/mitosis-cli": none
 "@builder.io/partytown": "https://github.com/BuilderIO/partytown/releases"
 "@builder.io/qwik": "https://github.com/BuilderIO/qwik/releases"
 "@builder.io/qwik-auth": "https://github.com/BuilderIO/qwik/releases"
@@ -996,12 +997,12 @@
 "@xstyled/system": "https://github.com/styled-components/xstyled/blob/-/packages/system/CHANGELOG.md"
 "@xstyled/util": "https://github.com/styled-components/xstyled/blob/-/packages/util/CHANGELOG.md"
 "active-win": "https://github.com/sindresorhus/active-win/releases"
-"active-win-cli": false
+"active-win-cli": none
 "alfy": "https://github.com/sindresorhus/alfy/releases"
 "animejs": "https://github.com/juliangarnier/anime/releases"
 "ansi-regex": "https://github.com/chalk/ansi-regex/releases"
 "ansi-styles": "https://github.com/chalk/ansi-styles/releases"
-"art": false
+"art": none
 "astro": "https://github.com/withastro/astro/blob/-/packages/astro/CHANGELOG.md"
 "astro-compressor": "https://github.com/sondr3/astro-compressor/blob/-/CHANGELOG.md"
 "astro-i18next": "https://github.com/yassinedoghri/astro-i18next/blob/-/CHANGELOG.md"
@@ -1015,8 +1016,8 @@
 "autoprefixer": "https://github.com/postcss/autoprefixer/blob/-/CHANGELOG.md"
 "axios": "https://github.com/axios/axios/blob/v1.x/CHANGELOG.md"
 "babel-plugin-module-resolver": "https://github.com/tleunen/babel-plugin-module-resolver/blob/-/CHANGELOG.md"
-"babel-plugin-optimize-obj-str": false
-"babel-plugin-react-native-web": false
+"babel-plugin-optimize-obj-str": none
+"babel-plugin-react-native-web": none
 "babel-plugin-styled-components": "https://github.com/styled-components/babel-plugin-styled-components/releases"
 "babel-preset-expo": "https://github.com/expo/expo/blob/-/packages/babel-preset-expo/CHANGELOG.md"
 "bach": "https://github.com/gulpjs/bach/blob/-/CHANGELOG.md"
@@ -1028,7 +1029,7 @@
 "boxen-cli": "https://github.com/sindresorhus/boxen-cli/releases"
 "c12": "https://github.com/unjs/c12/blob/-/CHANGELOG.md"
 "cac": "https://github.com/cacjs/cac/releases"
-"cache-conf": false
+"cache-conf": none
 "camelcase": "https://github.com/sindresorhus/camelcase/releases"
 "camelcase-keys": "https://github.com/sindresorhus/camelcase-keys/releases"
 "capture-website": "https://github.com/sindresorhus/capture-website/releases"
@@ -1058,7 +1059,7 @@
 "clipboardy": "https://github.com/sindresorhus/clipboardy/releases"
 "clone-buffer": "https://github.com/gulpjs/clone-buffer/releases"
 "clsx": "https://github.com/lukeed/clsx/releases"
-"color-convert": false
+"color-convert": none
 "colors": "https://github.com/Marak/colors.js/blob/-/ROADMAP.md"
 "commander": "https://github.com/tj/commander.js/blob/-/CHANGELOG.md"
 "commitlint": "https://github.com/conventional-changelog/commitlint/blob/-/CHANGELOG.md"
@@ -1127,10 +1128,11 @@
 "electron-dl": "https://github.com/sindresorhus/electron-dl/releases"
 "electron-serve": "https://github.com/sindresorhus/electron-serve/releases"
 "electron-store": "https://github.com/sindresorhus/electron-store/releases"
-"electron-timber": false
+"electron-timber": none
 "electron-unhandled": "https://github.com/sindresorhus/electron-unhandled/releases"
 "electron-util": "https://github.com/sindresorhus/electron-util/releases"
-"ember": "https://github.com/emberjs/ember.js/blob/-/CHANGELOG.md" # fixme: metapackage
+# FIXME: metapackage
+"ember": "https://github.com/emberjs/ember.js/blob/-/CHANGELOG.md"
 "ember-cli": "https://github.com/ember-cli/ember-cli/blob/-/CHANGELOG.md"
 "ember-cli-babel": "https://github.com/babel/ember-cli-babel/blob/-/CHANGELOG.md"
 "ember-cli-htmlbars": "https://github.com/ember-cli/ember-cli-htmlbars/blob/-/CHANGELOG.md"
@@ -1312,15 +1314,15 @@
 "is-online": "https://github.com/sindresorhus/is-online/releases"
 "is-online-cli": "https://github.com/sindresorhus/is-online-cli/releases"
 "is-reachable": "https://github.com/sindresorhus/is-reachable/releases"
-"items-promise": false
-"jed": false
+"items-promise": none
+"jed": none
 "jest-expo": "https://github.com/expo/expo/blob/-/packages/jest-expo/CHANGELOG.md"
-"jest-react": false
+"jest-react": none
 "jiti": "https://github.com/unjs/jiti/blob/-/CHANGELOG.md"
 "joycon": "https://github.com/egoist/joycon/releases"
 "jquery": "https://blog.jquery.com/category/jquery/"
 "js-yaml": "https://github.com/nodeca/js-yaml/blob/-/CHANGELOG.md"
-"json-to-pretty-yaml": false
+"json-to-pretty-yaml": none
 "knitwork": "https://github.com/unjs/knitwork/blob/-/CHANGELOG.md"
 "koa": "https://github.com/koajs/koa/blob/-/History.md"
 "ky": "https://github.com/sindresorhus/ky/releases"
@@ -1340,7 +1342,7 @@
 "loader-utils": "https://github.com/webpack/loader-utils/blob/-/CHANGELOG.md"
 "lodash": "https://github.com/lodash/lodash/wiki/Changelog"
 "lodash-codemods": "https://github.com/jfmengels/lodash-codemods/releases"
-"lodash-migrate": false
+"lodash-migrate": none
 "log-symbols": "https://github.com/sindresorhus/log-symbols/releases"
 "log-update": "https://github.com/sindresorhus/log-update/releases"
 "lucide": "https://github.com/lucide-icons/lucide/releases"
@@ -1379,7 +1381,7 @@
 "netlify-cli": "https://github.com/netlify/cli/releases"
 "neutrino": "https://github.com/neutrinojs/neutrino/blob/-/CHANGELOG.md"
 "next": "https://github.com/vercel/next.js/releases"
-"ngx-ow": false
+"ngx-ow": none
 "nitropack": "https://github.com/unjs/nitro/releases"
 "node-fetch": "https://github.com/node-fetch/node-fetch/releases"
 "node-sass": "https://github.com/sass/node-sass/releases"
@@ -1417,7 +1419,7 @@
 "p-do-whilst": "https://github.com/sindresorhus/p-do-whilst/releases"
 "p-each-series": "https://github.com/sindresorhus/p-each-series/releases"
 "p-event": "https://github.com/sindresorhus/p-event/releases"
-"p-every": false
+"p-every": none
 "p-filter": "https://github.com/sindresorhus/p-filter/releases"
 "p-forever": "https://github.com/sindresorhus/p-forever/releases"
 "p-if": "https://github.com/sindresorhus/p-if/releases"
@@ -1431,7 +1433,7 @@
 "p-map-series": "https://github.com/sindresorhus/p-map-series/releases"
 "p-memoize": "https://github.com/sindresorhus/p-memoize/releases"
 "p-min-delay": "https://github.com/sindresorhus/p-min-delay/releases"
-"p-one": false
+"p-one": none
 "p-pipe": "https://github.com/sindresorhus/p-pipe/releases"
 "p-progress": "https://github.com/sindresorhus/p-progress/releases"
 "p-props": "https://github.com/sindresorhus/p-props/releases"
@@ -1634,9 +1636,9 @@
 "supports-color": "https://github.com/chalk/supports-color/releases"
 "svelte": "https://github.com/sveltejs/svelte/releases"
 "svelte-check": "https://github.com/sveltejs/language-tools/releases"
-"svelte-icons-pack": false
+"svelte-icons-pack": none
 "svelte-language-server": "https://github.com/sveltejs/language-tools/releases"
-"svelte-legos": false
+"svelte-legos": none
 "svelte-migrate": "https://github.com/sveltejs/kit/blob/-/packages/migrate/CHANGELOG.md"
 "svelte-preprocess": "https://github.com/sveltejs/svelte-preprocess/blob/-/CHANGELOG.md"
 "svelte-scrolling": "https://github.com/valmisson/svelte-scrolling/blob/-/CHANGELOG.md"
@@ -1650,7 +1652,7 @@
 "terminal-link-cli": "https://github.com/sindresorhus/terminal-link-cli/releases"
 "terser": "https://github.com/terser/terser/blob/-/CHANGELOG.md"
 "theming-log": "https://github.com/gulpjs/theming-log/blob/-/CHANGELOG.md"
-"through2": false
+"through2": none
 "tinygradient": "https://github.com/mistic100/tinygradient/releases"
 "titleize": "https://github.com/sindresorhus/titleize/releases"
 "to-through": "https://github.com/gulpjs/to-through/blob/-/CHANGELOG.md"
@@ -1683,7 +1685,7 @@
 "unstorage": "https://github.com/unjs/unstorage/blob/-/CHANGELOG.md"
 "untyped": "https://github.com/unjs/untyped/blob/-/CHANGELOG.md"
 "unused-filename": "https://github.com/sindresorhus/unused-filename/releases"
-"uppercamelcase": false
+"uppercamelcase": none
 "use-subscription": "https://github.com/facebook/react/blob/-/CHANGELOG.md"
 "use-sync-external-store": "https://github.com/facebook/react/blob/-/CHANGELOG.md"
 "uuid": "https://github.com/uuidjs/uuid/blob/-/CHANGELOG.md"
@@ -1708,7 +1710,7 @@
 "vuefire": "https://github.com/vuejs/vuefire/blob/-/CHANGELOG.md"
 "wallpaper": "https://github.com/sindresorhus/wallpaper/releases"
 "wallpaper-cli": "https://github.com/sindresorhus/wallpaper-cli/releases"
-"watch": false
+"watch": none
 "web-api-hooks": "https://github.com/kripod/react-hooks/blob/-/packages/web-api-hooks/CHANGELOG.md"
 "webpack": "https://github.com/webpack/webpack/releases"
 "webpack-cli": "https://github.com/webpack/webpack-cli/blob/-/CHANGELOG.md"
@@ -1718,11 +1720,11 @@
 "wrap-ansi": "https://github.com/chalk/wrap-ansi/releases"
 "write-json-file": "https://github.com/sindresorhus/write-json-file/releases"
 "xgettext-js": "https://github.com/Automattic/xgettext-js/blob/-/CHANGELOG.md"
-"yamljs": false
+"yamljs": none
 "yargs": "https://github.com/yargs/yargs/blob/-/CHANGELOG.md"
 "yeoman-generator": "https://github.com/yeoman/generator/releases"
 "yoctocolors": "https://github.com/sindresorhus/yoctocolors/releases"
 "yoctodelay": "https://github.com/sindresorhus/yoctodelay/releases"
-"yoga-layout": false
+"yoga-layout": none
 "zepto": "https://github.com/madrobby/zepto/releases"
 "zone.js": "https://github.com/angular/angular/blob/-/packages/zone.js/CHANGELOG.md"

@@ -3,11 +3,12 @@
   import clsx from "clsx";
   import { browser } from "$app/environment";
   import { currentPage } from "$lib/stores";
+  import { load } from "$lib/parser";
   import { page } from "$app/stores";
   import Pages from "./Pages.svelte";
 
-  import rawData from "../../../changelog-db.yaml";
-  const data: [string, string][] = Object.entries(rawData);
+  import rawData from "../../../changelog-db.data?raw";
+  const data = [...load(rawData)];
 
   const url = $page.url;
   let rawInput = url.searchParams.get("q") || "";
@@ -134,8 +135,8 @@
     <Pages {maxPage} />
     <ul id="list" class="divide-y divide-neutral-content/25">
       {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
-        {#if url}
-          <li class="flex h-12 w-full items-center space-x-1">
+        <li class="flex h-12 w-full items-center space-x-1">
+          {#if url}
             <a
               class="link flex h-full w-11/12 items-center"
               target="_blank"
@@ -143,17 +144,21 @@
             >
               <span class="truncate">{pkg}</span>
             </a>
-            <a
-              class="link flex h-full w-1/12 items-center text-center"
-              href="https://npmjs.com/package/{pkg}"
-              target="_blank"
-            >
-              <span>
-                <LogoNpm title="View {pkg} on npm" size={32} />
-              </span>
-            </a>
-          </li>
-        {/if}
+          {:else}
+            <span class="link flex h-full w-11/12 items-center">
+              <span class="truncate">{pkg} (no url)</span>
+            </span>
+          {/if}
+          <a
+            class="link flex h-full w-1/12 items-center text-center"
+            href="https://npmjs.com/package/{pkg}"
+            target="_blank"
+          >
+            <span>
+              <LogoNpm title="View {pkg} on npm" size={32} />
+            </span>
+          </a>
+        </li>
       {/each}
     </ul>
     <Pages {maxPage} />
