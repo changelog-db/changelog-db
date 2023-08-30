@@ -29,17 +29,35 @@
   $: searchInput = rawInput.trim();
   $: tokens = searchInput.split(/\s+/);
   $: filtered = data
-    .filter(([pkg, _url]) => {
-      return tokens.every((token) => pkg.includes(token));
+    .map((entry) => {
+      const pkg = entry[0];
+      const url = entry[1];
+      let matchType: string | null = null;
+      if (tokens.every((token) => pkg.includes(token))) {
+        matchType = "pkg";
+      } else if (
+        tokens.every((token) => (url?.toLowerCase() || "none").includes(token))
+      ) {
+        matchType = "url";
+      } else {
+        matchType = null;
+      }
+      // Without the as it'd get typed as Array<string | null> even
+      // though the first element cannot be null
+      return [pkg, url, matchType] as [string, string | null, string | null];
     })
-    .sort(([aPkg], [bPkg]) => {
-      // Put prefix matches first
+    .filter(([_pkg, _url, matchType]) => matchType)
+    .sort(([aPkg, _aUrl, aMatchType], [bPkg, _bUrl, bMatchType]) => {
+      // Put pkg prefix matches first
       if (searchInput.length > 0) {
         const a = aPkg.startsWith(searchInput);
         const b = bPkg.startsWith(searchInput);
         if (a && !b) return -1;
         if (b && !a) return 1;
       }
+      // Put url matches after pkg matches
+      if (aMatchType === "pkg" && bMatchType === "url") return -1;
+      if (bMatchType === "pkg" && aMatchType === "url") return 1;
       return aPkg < bPkg ? -1 : 1;
     });
 
@@ -129,22 +147,19 @@
   />
   {#if filtered.length > 0}
     <Pages {maxPage} />
-    <ul id="list" class="divide-y divide-neutral-content/25">
+    <ul id="list" class="divide-y divide-neutral/20">
       {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
         <li class="flex h-12 w-full items-center space-x-1">
-          {#if url}
-            <a
-              class="link flex h-full w-11/12 items-center"
-              target="_blank"
-              href={url}
+          <a
+            class="link flex h-full w-11/12 items-center truncate"
+            target="_blank"
+            href={url || `https://npmjs.com/package/${pkg}`}
+            title={url ? undefined : "No changelog found"}
+          >
+            <span class="truncate"
+              >{pkg} <span class="opacity-75">({url || "none"})</span></span
             >
-              <span class="truncate">{pkg}</span>
-            </a>
-          {:else}
-            <span class="link flex h-full w-11/12 items-center">
-              <span class="truncate">{pkg} (no url)</span>
-            </span>
-          {/if}
+          </a>
           <a
             class="link flex h-full w-1/12 items-center text-center"
             href="https://npmjs.com/package/{pkg}"
