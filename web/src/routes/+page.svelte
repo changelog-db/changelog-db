@@ -1,14 +1,21 @@
 <script lang="ts">
   import LogoNpm from "carbon-icons-svelte/lib/LogoNpm.svelte";
+  import Delete from "carbon-icons-svelte/lib/Delete.svelte";
+  import Add from "carbon-icons-svelte/lib/Add.svelte";
   import clsx from "clsx";
   import { browser } from "$app/environment";
   import { currentPage } from "$lib/stores";
-  import { load } from "$lib/parser";
+  import { load, dump } from "$lib/parser";
   import { page } from "$app/stores";
+  import { addCustom, removeCustom, getCustom } from "$lib/local";
   import Pages from "./Pages.svelte";
 
   import rawData from "../../../changelog-db.data?raw";
-  const data = [...load(rawData)];
+  const importedData = [...load(rawData)];
+
+  let customData = getCustom();
+  $: dataMap = new Map([...importedData, ...customData]);
+  $: data = [...dataMap];
 
   const url = $page.url;
   let rawInput = url.searchParams.get("q") || "";
@@ -55,9 +62,20 @@
         if (a && !b) return -1;
         if (b && !a) return 1;
       }
-      // Put url matches after pkg matches
-      if (aMatchType === "pkg" && bMatchType === "url") return -1;
-      if (bMatchType === "pkg" && aMatchType === "url") return 1;
+      // Then custom entries
+      {
+        const a = customData.has(aPkg);
+        const b = customData.has(bPkg);
+        if (a && !b) return -1;
+        if (b && !a) return 1;
+      }
+      // Put pkg matches before url matches
+      {
+        const a = aMatchType === "pkg";
+        const b = bMatchType === "pkg";
+        if (a && !b) return -1;
+        if (b && !a) return 1;
+      }
       return aPkg < bPkg ? -1 : 1;
     });
 
@@ -67,6 +85,28 @@
   $: pageEnd = pageSize * $currentPage;
   // Reset page to 1 when `filtered` changes
   $: filtered, ($currentPage = 1);
+
+  function addEntryHandler() {
+    const pkgInput = document.getElementById("pkgInput") as HTMLInputElement;
+    const urlInput = document.getElementById("urlInput") as HTMLInputElement;
+    const pkgValue = pkgInput.value.trim();
+    const urlValue = urlInput.value.trim();
+    let url: string | null = null;
+    if (urlValue !== "") {
+      url = urlValue;
+    }
+    if (pkgValue === "") {
+      pkgInput.classList.add("input-error");
+      return;
+    }
+    pkgInput.classList.remove("input-error");
+    addCustom(pkgValue, url, customData);
+    // Notify Svelte to update
+    customData = customData;
+    // Clear the fields
+    pkgInput.value = "";
+    urlInput.value = "";
+  }
 </script>
 
 <svelte:head>
@@ -152,9 +192,12 @@
     {/if}
     <ul id="list" class="divide-y divide-neutral/20">
       {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
+        {@const isCustom = customData.has(pkg)}
         <li class="flex h-12 w-full items-center space-x-1">
           <a
-            class="link flex h-full w-11/12 items-center truncate"
+            class={`link flex h-full ${
+              isCustom ? "w-10/12" : "w-11/12"
+            } items-center truncate`}
             target="_blank"
             href={url || `https://npmjs.com/package/${pkg}`}
             title={url ? undefined : "No changelog found"}
@@ -163,6 +206,16 @@
               >{pkg} <span class="opacity-75">({url || "none"})</span></span
             >
           </a>
+          {#if isCustom}
+            <button
+              title="Delete custom entry"
+              class="link h-full w-1/12"
+              on:click={() => {
+                removeCustom(pkg, customData);
+                customData = customData;
+              }}><Delete size={24} /></button
+            >
+          {/if}
           <a
             class="link flex h-full w-1/12 items-center text-center"
             href="https://npmjs.com/package/{pkg}"
@@ -196,6 +249,55 @@
           >
         </li>
       </ul>
+    </div>
+  {/if}
+
+  {#if browser}
+    <div>
+      <div class="prose">
+        <h3 class="font-bold">Add a custom entry</h3>
+        <p>
+          Custom entries are saved in localStorage and take precedence over
+          default entries.
+        </p>
+      </div>
+      <form class="flex items-end">
+        <label for="pkgInput" class="label flex flex-col items-start gap-y-1">
+          <span class="label-text">Package name</span>
+          <input
+            id="pkgInput"
+            type="text"
+            placeholder="abc"
+            class="input input-bordered"
+          />
+        </label>
+        <label for="urlInput" class="label flex flex-col items-start gap-y-1">
+          <span class="label-text">Changelog URL</span>
+          <input
+            id="urlInput"
+            type="text"
+            placeholder="https://example.com"
+            class="input input-bordered"
+          />
+        </label>
+        <button class="link py-[0.5rem]" on:click={addEntryHandler}
+          ><Add class="h-[3rem]" size={24} /></button
+        >
+      </form>
+      <div class="prose mt-4">
+        <h3 class="font-bold">Import/Export</h3>
+        <p>
+          Right now this is a rudimentary version that exports all custom
+          entries to the console, and import hasn't been implemented yet. This
+          is currently only useful for me to copy entries to the main file.
+        </p>
+        <button
+          class="btn"
+          on:click={() => {
+            console.log(dump(customData));
+          }}>Export</button
+        >
+      </div>
     </div>
   {/if}
 </main>

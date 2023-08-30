@@ -16,3 +16,11 @@ export function load(input: string): Map<string, string | null> {
   });
   return map;
 }
+
+export function dump(map: Map<string, string | null>) {
+  const lines: string[] = [];
+  map.forEach((value, key) => {
+    lines.push(`"${key}": ${value ? `"${value}"` : "none"}`);
+  });
+  return lines.join("\n");
+}
