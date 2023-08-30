@@ -15,7 +15,7 @@
     "@sveltejs/kit": "^1.22.6",
     "carbon-icons-svelte": "^12.1.0",
     "clsx": "^2.0.0",
-    "daisyui": "^3.5.1",
+    "daisyui": "^3.6.3",
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "prettier-plugin-tailwindcss": "^0.3.0",
