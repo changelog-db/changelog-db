@@ -147,7 +147,9 @@
   />
   {#if filtered.length > 0}
     <Pages {maxPage} />
-    <h2 class="-mt-2 text-center font-bold">{filtered.length} matches</h2>
+    {#if filtered.length !== data.length}
+      <h2 class="-mt-2 text-center font-bold">{filtered.length} matches</h2>
+    {/if}
     <ul id="list" class="divide-y divide-neutral/20">
       {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
         <li class="flex h-12 w-full items-center space-x-1">
