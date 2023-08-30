@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        @apply bg-base-100;
-    }
+  html {
+    @apply bg-base-100;
+  }
 }
 
 @layer utilities {
@@ -15,8 +15,7 @@
     }
   }
   .link {
-    @apply underline;
-    text-underline-offset: 2px;
+    @apply no-underline;
     @apply transition duration-100 hover:opacity-60;
   }
   .btn {
@@ -27,7 +26,7 @@
       @apply mb-4 text-4xl font-[300];
     }
     a {
-      @apply link;
+      @apply link text-blue-400;
     }
     p {
       @apply my-2;
