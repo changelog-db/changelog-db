@@ -13,7 +13,7 @@
     "@size-limit/file": "^8.2.6",
     "@sveltejs/adapter-netlify": "^2.0.8",
     "@sveltejs/kit": "^1.22.6",
-    "carbon-icons-svelte": "^12.1.0",
+    "carbon-icons-svelte": "^12.2.0",
     "clsx": "^2.0.0",
     "daisyui": "^3.6.3",
     "prettier": "^2.8.8",

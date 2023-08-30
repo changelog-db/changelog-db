@@ -26,8 +26,8 @@ importers:
         specifier: ^1.22.6
         version: 1.22.6(svelte@4.2.0)(vite@4.4.9)
       carbon-icons-svelte:
-        specifier: ^12.1.0
-        version: 12.1.0
+        specifier: ^12.2.0
+        version: 12.2.0
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
@@ -528,8 +528,8 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  /carbon-icons-svelte@12.1.0:
-    resolution: {integrity: sha512-RPU+W/AhkdPRqHMaShOdFluQZXMT6PNYrqEwPxDBvmrX2ioOYhZo1J508e0WeVX69iOqyUv6KjxrdbsoDdogeg==}
+  /carbon-icons-svelte@12.2.0:
+    resolution: {integrity: sha512-Fl00ocz1gqs8g+/Nfemc/DKQeTXxMHvPHiXxEYAqPDkVNLKnohVRWLaGio7/FU3sDY/DkpZ5FmlitLISP4fmLg==}
     dev: true
 
   /chokidar@3.5.3:
@@ -544,7 +544,7 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /clsx@2.0.0:
@@ -741,8 +741,8 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -1271,7 +1271,7 @@ packages:
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /run-parallel@1.2.0:
@@ -1622,7 +1622,7 @@ packages:
       postcss: 8.4.28
       rollup: 3.28.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /vitefu@0.2.4(vite@4.4.9):
