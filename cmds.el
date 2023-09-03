@@ -98,19 +98,19 @@ come before \"a-\" as expected. A naive text sort would put \"a-:
        ;; Going from the start of a record to its end:
        ;; The end of the line after skipping comment lines
        (lambda ()
-         (while (looking-at "^[[:space:]]*#" t)
+         (while (looking-at "^[[:space:]]*#")
            (forward-line))
          (end-of-line))
        ;; Going from the start of the record to the start of the key:
        ;; Skip comment lines.
        ;; (forward-line already stops at the beginning of line)
        (lambda ()
-         (while (looking-at "^[[:space:]]*#" t)
+         (while (looking-at "^[[:space:]]*#")
            (forward-line)))
        ;; Going to end of the key from the start of the key:
        ;; The end of the line or the end of the key.
        (lambda ()
-         (if (search-forward ":" (pos-eol) t)
+         (if (search-forward ":" (line-end-position) t)
              (forward-char -1)
            (end-of-line)))))))
 (defun ChangelogDB::format-data ()
