@@ -287,14 +287,15 @@
       <div class="prose mt-4">
         <h3 class="font-bold">Import/Export</h3>
         <p>
-          Right now this is a rudimentary version that exports all custom
-          entries to the console, and import hasn't been implemented yet. This
-          is currently only useful for me to copy entries to the main file.
+          Right now this is a rudimentary version that copies the exported text
+          to the clipboard.
         </p>
         <button
           class="btn"
           on:click={() => {
-            console.log(dump(customData));
+            const value = dump(customData);
+            navigator.clipboard.writeText(value);
+            console.log(value);
           }}>Export</button
         >
       </div>
