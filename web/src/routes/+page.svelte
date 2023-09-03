@@ -239,12 +239,14 @@
         <li>
           <a
             class="out link text-secondary-focus"
+            target="_blank"
             href="https://www.google.com/search?q={searchInput}">Google</a
           >
         </li>
         <li>
           <a
             class="out link text-secondary-focus"
+            target="_blank"
             href="https://www.npmjs.com/search?q={searchInput}">npm</a
           >
         </li>
