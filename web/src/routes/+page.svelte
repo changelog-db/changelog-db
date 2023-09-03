@@ -261,7 +261,7 @@
           default entries.
         </p>
       </div>
-      <form class="flex items-end">
+      <form class="flex items-end flex-wrap">
         <label for="pkgInput" class="label flex flex-col items-start gap-y-1">
           <span class="label-text">Package name</span>
           <input
