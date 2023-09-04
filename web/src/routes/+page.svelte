@@ -40,10 +40,10 @@
       const pkg = entry[0];
       const url = entry[1];
       let matchType: string | null = null;
-      if (tokens.every((token) => pkg.includes(token))) {
+      if (tokens.every((token) => pkg.match(token))) {
         matchType = "pkg";
       } else if (
-        tokens.every((token) => (url?.toLowerCase() || "none").includes(token))
+        tokens.every((token) => (url?.toLowerCase() || "none").match(token))
       ) {
         matchType = "url";
       } else {
@@ -263,7 +263,7 @@
           default entries.
         </p>
       </div>
-      <form class="flex items-end flex-wrap">
+      <form class="flex flex-wrap items-end">
         <label for="pkgInput" class="label flex flex-col items-start gap-y-1">
           <span class="label-text">Package name</span>
           <input
