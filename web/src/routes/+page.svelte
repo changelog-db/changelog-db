@@ -262,7 +262,7 @@
           default entries.
         </p>
       </div>
-      <form class="pl-1">
+      <form on:submit|preventDefault={addEntryHandler} class="pl-1">
         <div
           class={clsx(
             "flex flex-wrap items-end",
@@ -285,7 +285,7 @@
             />
           </label>
         </div>
-        <button class="btn" on:click={addEntryHandler}>Add entry</button>
+        <button class="btn">Add entry</button>
       </form>
       <div class="prose mt-4">
         <h3 class="font-bold">Import/Export</h3>
