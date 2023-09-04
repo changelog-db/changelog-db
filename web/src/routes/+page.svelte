@@ -85,6 +85,16 @@
   // Reset page to 1 when `filtered` changes
   $: filtered, ($currentPage = 1);
 
+  function deleteEntryHandler(pkg: string, url: string | null) {
+    const pkgInput = document.getElementById("pkgInput") as HTMLInputElement;
+    const urlInput = document.getElementById("urlInput") as HTMLInputElement;
+    removeCustom(pkg, customData);
+    // Notify Svelte to update
+    customData = customData;
+    pkgInput.value = pkg;
+    urlInput.value = url || ""; // empty URL input also means none
+  }
+
   function addEntryHandler() {
     const pkgInput = document.getElementById("pkgInput") as HTMLInputElement;
     const urlInput = document.getElementById("urlInput") as HTMLInputElement;
@@ -209,10 +219,8 @@
             <button
               title="Delete custom entry"
               class="link h-full w-1/12"
-              on:click={() => {
-                removeCustom(pkg, customData);
-                customData = customData;
-              }}><Delete size={24} /></button
+              on:click={() => deleteEntryHandler(pkg, url)}
+              ><Delete size={24} /></button
             >
           {/if}
           <a
