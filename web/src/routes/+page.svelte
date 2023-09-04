@@ -1,7 +1,6 @@
 <script lang="ts">
   import LogoNpm from "carbon-icons-svelte/lib/LogoNpm.svelte";
   import Delete from "carbon-icons-svelte/lib/Delete.svelte";
-  import Add from "carbon-icons-svelte/lib/Add.svelte";
   import clsx from "clsx";
   import { browser } from "$app/environment";
   import { currentPage } from "$lib/stores";
@@ -263,28 +262,30 @@
           default entries.
         </p>
       </div>
-      <form class="flex flex-wrap items-end">
-        <label for="pkgInput" class="label flex flex-col items-start gap-y-1">
-          <span class="label-text">Package name</span>
-          <input
-            id="pkgInput"
-            type="text"
-            placeholder="abc"
-            class="input input-bordered"
-          />
-        </label>
-        <label for="urlInput" class="label flex flex-col items-start gap-y-1">
-          <span class="label-text">Changelog URL</span>
-          <input
-            id="urlInput"
-            type="text"
-            placeholder="https://example.com"
-            class="input input-bordered"
-          />
-        </label>
-        <button class="link py-[0.5rem]" on:click={addEntryHandler}
-          ><Add class="h-[3rem]" size={24} /></button
+      <form class="pl-1">
+        <div
+          class={clsx(
+            "flex flex-wrap items-end",
+            "[&_.label]:flex-col [&_.label]:items-start",
+            "[&_.label]:gap-1 [&_.label]:pl-0",
+            "[&_.input]:input-bordered"
+          )}
         >
+          <label for="pkgInput" class="label">
+            <span class="label-text">Package name</span>
+            <input id="pkgInput" type="text" placeholder="abc" class="input" />
+          </label>
+          <label for="urlInput" class="label">
+            <span class="label-text">Changelog URL</span>
+            <input
+              id="urlInput"
+              type="text"
+              placeholder="https://example.com"
+              class="input"
+            />
+          </label>
+        </div>
+        <button class="btn" on:click={addEntryHandler}>Add entry</button>
       </form>
       <div class="prose mt-4">
         <h3 class="font-bold">Import/Export</h3>
