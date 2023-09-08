@@ -806,6 +806,8 @@
 "@swc-node/register": "https://github.com/swc-project/swc-node/blob/-/packages/register/CHANGELOG.md"
 "@swc-node/sourcemap-support": "https://github.com/swc-project/swc-node/blob/-/packages/sourcemap-support/CHANGELOG.md"
 "@swc/core": "https://github.com/swc-project/swc/blob/-/CHANGELOG.md"
+"@tailwindcss/forms": "https://github.com/tailwindlabs/tailwindcss-forms/blob/-/CHANGELOG.md"
+"@tailwindcss/typography": "https://github.com/tailwindlabs/tailwindcss-typography/blob/-/CHANGELOG.md"
 "@thi.ng/adapt-dpi": "https://github.com/thi-ng/umbrella/blob/-/packages/adapt-dpi/CHANGELOG.md"
 "@thi.ng/adjacency": "https://github.com/thi-ng/umbrella/blob/-/packages/adjacency/CHANGELOG.md"
 "@thi.ng/api": "https://github.com/thi-ng/umbrella/blob/-/packages/api/CHANGELOG.md"
