@@ -17,7 +17,9 @@ For now, here's a package changelog index. Manually collected (semi-automated wi
 
 Top 1000 npm packages by number of dependents, number of dependencies, or pagerank score: [anvaka/npm rank](https://gist.github.com/anvaka/8e8fa57c7ee1350e3491).
 
-`false` represents "I've checked and it doesn't have a changelog".
+Or use <https://github.com/wooorm/npm-high-impact>. As of 2023-09-20 I've made sure its first 100 entries are added.
+
+`none` represents "I've checked and it doesn't have a changelog".
 
 Monorepo GitHub releases: If I can find a search term to narrow it down to the package, I'll try to do so. If not, the release page is recorded as the changelog URL instead.
 
