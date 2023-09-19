@@ -65,7 +65,7 @@ URL can contain %s which stands for the package name."
       (goto-char (point-max))
       (insert
        (if (equal url "")
-           (format "\"%s\": false\n" pkg)
+           (format "\"%s\": none\n" pkg)
          (format "\"%s\": \"%s\"\n"
                  pkg
                  ;; If URL doesn't have a placeholder, it's just
