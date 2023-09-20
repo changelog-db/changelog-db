@@ -79,7 +79,7 @@
       return aPkg < bPkg ? -1 : 1;
     });
 
-  const pageSize = 100;
+  const pageSize = 50;
   $: maxPage = Math.max(1, Math.ceil(filtered.length / pageSize));
   $: pageStart = pageSize * ($currentPage - 1);
   $: pageEnd = pageSize * $currentPage;
