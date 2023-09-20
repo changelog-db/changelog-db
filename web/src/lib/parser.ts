@@ -1,6 +1,8 @@
-export function load(input: string): Map<string, string | null> {
+export type CustomData = Map<string, string | null>;
+
+export function load(input: string): CustomData {
   const lines = input.split("\n");
-  const map: Map<string, string | null> = new Map();
+  const map: CustomData = new Map();
   lines.forEach((line) => {
     // Avoid rebuild with split
     const match = line.match(/^([^ #]*):(.*)/);
@@ -17,7 +19,7 @@ export function load(input: string): Map<string, string | null> {
   return map;
 }
 
-export function dump(map: Map<string, string | null>) {
+export function dump(map: CustomData) {
   const lines: string[] = [];
   map.forEach((value, key) => {
     lines.push(`"${key}": ${value ? `"${value}"` : "none"}`);

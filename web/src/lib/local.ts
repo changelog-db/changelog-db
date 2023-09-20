@@ -1,4 +1,4 @@
-export type CustomData = Map<string, string | null>;
+import type { CustomData } from "./parser";
 
 export function getCustom(): CustomData {
   try {
