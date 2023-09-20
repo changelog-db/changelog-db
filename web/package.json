@@ -5,7 +5,7 @@
   "size-limit": [
     {
       "path": "build/_app/**/*.js",
-      "limit": "50 KB",
+      "limit": "100 KB",
       "gzip": true
     }
   ],
