@@ -19,6 +19,13 @@ export function setCustom(map: Map<string, string | null>) {
   );
 }
 
+export function updateCustom(
+  updater: (current: Map<string, string | null>) => Map<string, string | null>
+) {
+  const current = getCustom();
+  setCustom(updater(current));
+}
+
 /**
  * Add a custom entry to localStorage.
  * If `map` is given, also add it to the map.
@@ -28,10 +35,11 @@ export function addCustom(
   url: string | null,
   map?: Map<string, string | null>
 ) {
-  const current = getCustom();
-  current.set(pkg, url);
-  map?.set(pkg, url);
-  setCustom(current);
+  updateCustom((current) => {
+    current.set(pkg, url);
+    map?.set(pkg, url);
+    return current;
+  });
 }
 
 /**
@@ -39,8 +47,9 @@ export function addCustom(
  * If `map` is given, also remove it from the map.
  */
 export function removeCustom(pkg: string, map?: Map<string, string | null>) {
-  const current = getCustom();
-  current.delete(pkg);
-  map?.delete(pkg);
-  setCustom(current);
+  updateCustom((current) => {
+    current.delete(pkg);
+    map?.delete(pkg);
+    return current;
+  });
 }
