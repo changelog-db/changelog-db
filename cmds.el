@@ -156,8 +156,8 @@ come before \"a-\" as expected. A naive text sort would put \"a-:
             (beginning-of-line))
           (goto-char old-point)))))
 (defun ChangelogDB:dev-setup ()
-  (pcase major-mode
-    ('yaml-mode
-     (add-hook 'before-save-hook #'ChangelogDB::format-data nil t)
-     (when (fboundp 'apheleia-mode)
-       (funcall #'apheleia-mode -1)))))
+  (when (-some-> (buffer-file-name)
+          (f-ext? "data"))
+    (add-hook 'before-save-hook #'ChangelogDB::format-data nil t)
+    (when (fboundp 'apheleia-mode)
+      (funcall #'apheleia-mode -1))))
