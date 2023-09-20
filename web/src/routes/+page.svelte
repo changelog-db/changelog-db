@@ -5,6 +5,7 @@
   import { browser } from "$app/environment";
   import { currentPage } from "$lib/stores";
   import { load, dump } from "$lib/parser";
+  import { safeMatch } from "$lib/helpers";
   import { page } from "$app/stores";
   import { addCustom, removeCustom, getCustom, setCustom } from "$lib/local";
   import Pages from "./Pages.svelte";
@@ -39,10 +40,10 @@
       const pkg = entry[0];
       const url = entry[1];
       let matchType: string | null = null;
-      if (tokens.every((token) => pkg.match(token))) {
+      if (tokens.every((token) => safeMatch(pkg, token))) {
         matchType = "pkg";
       } else if (
-        tokens.every((token) => (url?.toLowerCase() || "none").match(token))
+        tokens.every((token) => safeMatch(url?.toLowerCase() || "none", token))
       ) {
         matchType = "url";
       } else {
