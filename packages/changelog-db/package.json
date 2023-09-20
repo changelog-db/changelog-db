@@ -1,0 +1,9 @@
+{
+  "name": "changelog-db",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Manually curated package name to changelog link data",
+  "keywords": [],
+  "author": "Kisaragi Hiu",
+  "license": "CC0"
+}
