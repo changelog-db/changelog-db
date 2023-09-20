@@ -1,4 +1,6 @@
-export function getCustom(): Map<string, string | null> {
+export type CustomData = Map<string, string | null>;
+
+export function getCustom(): CustomData {
   try {
     const value = localStorage.getItem("changelog-db-custom");
     if (value) {
@@ -12,16 +14,16 @@ export function getCustom(): Map<string, string | null> {
   }
 }
 
-export function setCustom(map: Map<string, string | null>) {
+/** Write CustomData `map` to storage. */
+export function setCustom(map: CustomData) {
   localStorage.setItem(
     "changelog-db-custom",
     JSON.stringify(Object.fromEntries(map))
   );
 }
 
-export function updateCustom(
-  updater: (current: Map<string, string | null>) => Map<string, string | null>
-) {
+/** Retrieve CustomData, pass it to `updater`, then write the result to storage. */
+export function updateCustom(updater: (current: CustomData) => CustomData) {
   const current = getCustom();
   setCustom(updater(current));
 }
@@ -30,11 +32,7 @@ export function updateCustom(
  * Add a custom entry to localStorage.
  * If `map` is given, also add it to the map.
  */
-export function addCustom(
-  pkg: string,
-  url: string | null,
-  map?: Map<string, string | null>
-) {
+export function addCustom(pkg: string, url: string | null, map?: CustomData) {
   updateCustom((current) => {
     current.set(pkg, url);
     map?.set(pkg, url);
@@ -46,7 +44,7 @@ export function addCustom(
  * Remove a custom entry from localStorage.
  * If `map` is given, also remove it from the map.
  */
-export function removeCustom(pkg: string, map?: Map<string, string | null>) {
+export function removeCustom(pkg: string, map?: CustomData) {
   updateCustom((current) => {
     current.delete(pkg);
     map?.delete(pkg);
