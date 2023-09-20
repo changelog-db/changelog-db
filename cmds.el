@@ -50,8 +50,10 @@ URL can contain %s which stands for the package name."
    (let ((pkgs (read-string "Package (space-separated): "
                             nil 'ChangelogDB::pkg-history)))
      (list pkgs
-           (read-string (format "Changelog URL for %s: " pkgs)
-                        nil 'ChangelogDB::url-history))))
+           (completing-read (format "Changelog URL for %s: " pkgs)
+                            (list "https://github.com/sindresorhus/%s/releases"
+                                  "https://github.com/jshttp/%s/blob/-/HISTORY.md")
+                            nil nil nil 'ChangelogDB::url-history))))
   (setq pkgs (->> pkgs
                   (s-replace "https://npmjs.com/package/" "")
                   string-trim))

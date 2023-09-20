@@ -19,6 +19,16 @@ Top 1000 npm packages by number of dependents, number of dependencies, or pagera
 
 Or use <https://github.com/wooorm/npm-high-impact>. As of 2023-09-20 I've made sure its first 100 entries are added.
 
+```typescript
+import {npmHighImpact} from 'https://esm.sh/npm-high-impact'
+import {load, dump} from "./web/src/lib/parser.ts"
+import {readFileSync} from "node:fs"
+function importData(){
+    return load(readFileSync("./changelog-db.data").toString())
+}
+npmHighImpact.slice(200, 250).filter((k) => !importData().has(k)).map((k) => `https://npmjs.com/package/${k}`)
+```
+
 `none` represents "I've checked and it doesn't have a changelog".
 
 Monorepo GitHub releases: If I can find a search term to narrow it down to the package, I'll try to do so. If not, the release page is recorded as the changelog URL instead.
