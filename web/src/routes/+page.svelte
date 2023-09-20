@@ -6,11 +6,11 @@
   import { currentPage } from "$lib/stores";
   import { load, dump } from "$lib/parser";
   import { page } from "$app/stores";
-  import { addCustom, removeCustom, getCustom } from "$lib/local";
+  import { addCustom, removeCustom, getCustom, setCustom } from "$lib/local";
   import Pages from "./Pages.svelte";
 
   import rawData from "../../../changelog-db.data?raw";
-  const importedData = [...load(rawData)];
+  const importedData = load(rawData);
 
   let customData = getCustom();
   $: dataMap = new Map([...importedData, ...customData]);
@@ -115,6 +115,21 @@
     // Clear the fields
     pkgInput.value = "";
     urlInput.value = "";
+  }
+
+  function removeDupEntriesHandler() {
+    let duplicates: Set<string> = new Set();
+    for (const [key, _value] of customData) {
+      if (importedData.has(key)) {
+        duplicates.add(key);
+      }
+    }
+    for (const dup of duplicates) {
+      customData.delete(dup);
+    }
+    // Notify Svelte to update
+    customData = customData;
+    setCustom(customData);
   }
 </script>
 
@@ -263,14 +278,14 @@
 
   {#if browser}
     <div>
-      <div class="prose">
-        <h3 class="font-bold">Add a custom entry</h3>
-        <p>
-          Custom entries are saved in localStorage and take precedence over
-          default entries.
-        </p>
-      </div>
       <form on:submit|preventDefault={addEntryHandler} class="pl-1">
+        <div class="prose">
+          <h3 class="font-bold">Add a custom entry</h3>
+          <p>
+            Custom entries are saved in localStorage and take precedence over
+            default entries.
+          </p>
+        </div>
         <div
           class={clsx(
             "flex flex-wrap items-end",
@@ -295,6 +310,17 @@
         </div>
         <button class="btn">Add entry</button>
       </form>
+      <div class="pl-1">
+        <div class="prose">
+          <p>
+            When new entries are added, it may be desirable to remove custom
+            entries that are currently shadowing built-in entries.
+          </p>
+        </div>
+        <button class="btn" on:click={removeDupEntriesHandler}
+          >Remove duplicate entries</button
+        >
+      </div>
       <div class="prose mt-4">
         <h3 class="font-bold">Import/Export</h3>
         <p>
