@@ -6,6 +6,22 @@ PyPI has it, and it's great! The JavaScript ecosystem should have it as well.
 
 For now, here's a package changelog index. Manually collected (semi-automated with Emacs), best-effort, hopefully saves some time.
 
+## Data format
+
+Sort-of yaml-ish
+
+Each line is an entry.
+
+    "<pkg>": "<url>"
+    # comments work
+    "<pkg>": none
+    
+- pkg is either an npm package name, or in the form `<type>:<name>`.
+- Types:
+  - npm: no prefix
+  - Browser extensions: `ext`
+  - JSR: `jsr`
+
 ## Roadmap
 
 - Emacs command

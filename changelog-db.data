@@ -1506,6 +1506,7 @@
 "expo-web-browser": "https://github.com/expo/expo/blob/-/packages/expo-web-browser/CHANGELOG.md"
 "expo-yarn-workspaces": "https://github.com/expo/expo/blob/-/packages/expo-yarn-workspaces/CHANGELOG.md"
 "express": "https://github.com/expressjs/express/blob/-/History.md"
+"ext:vimium": "https://github.com/philc/vimium/blob/-/CHANGELOG.md"
 "extend-shallow": none
 "fancy-log": "https://github.com/gulpjs/fancy-log/blob/-/CHANGELOG.md"
 "fast-cli": "https://github.com/sindresorhus/fast-cli/releases"
