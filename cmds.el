@@ -4,7 +4,6 @@
 (require 'f)
 (require 'json)
 (require 's)
-(require 'git)
 
 (defvar ChangelogDB::pkg-history)
 (defvar ChangelogDB::url-history)
@@ -76,8 +75,8 @@ URL can contain %s which stands for the package name."
 (defun ChangelogDB:clone (url)
   "Git clone URL so that we can run `ChangelogDB:add-folder' on it."
   (interactive "MURL: ")
-  (let ((git-repo temporary-file-directory))
-    (git-run "clone" "--depth" "1" url)))
+  (let ((default-directory temporary-file-directory))
+    (call-process "git" nil nil nil "clone" "--depth" "1" url)))
 
 (defun ChangelogDB::sort-data ()
   "Sort the data fields.
