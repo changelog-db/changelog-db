@@ -224,7 +224,7 @@
   </ul>
   <Pages {maxPage} />
 {:else}
-  <div class="my-4 space-y-2 text-center text-neutral">
+  <div class="my-4 space-y-2 text-center text-base-content">
     <h2 class="text-2xl font-bold">No matches!</h2>
     <div>
       Search for <code class="text-primary-focus">{searchInput}</code> on:
