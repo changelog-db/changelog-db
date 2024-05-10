@@ -25,6 +25,18 @@
     h1 {
       @apply mb-4 text-4xl font-[300];
     }
+    h2 {
+      @apply mb-4 mt-4 text-2xl font-[300];
+    }
+    ul {
+      @apply list-disc pl-4;
+      li {
+        @apply my-1;
+      }
+      p {
+        @apply my-0;
+      }
+    }
     a {
       @apply link text-blue-400;
     }

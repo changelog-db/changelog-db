@@ -3,20 +3,17 @@
   import clsx from "clsx";
   import { page } from "$app/stores";
   const tabs = [
-    ["/", "About"],
-    ["/changelogs", "Changelogs"],
+    ["/", "Changelog listing"],
+    ["/about", "About"],
   ];
 </script>
 
-<main
-  class={clsx(
-    "mx-auto my-4 w-[95%] max-w-[60rem]",
-    "lg:my-16 lg:flex lg:gap-x-4 lg:[&>div]:min-w-0",
-  )}
->
-  <div class="prose">
-    <h1>ChangelogDB</h1>
-    <div role="tablist" class="tabs tabs-bordered tabs-lg">
+<div class="navbar lg:hidden">
+  <div class="flex-1">
+    <a href="/" class="text-xl hover:underline">ChangelogDB</a>
+  </div>
+  <div class="flex-none">
+    <div role="tablist" class="tabs tabs-bordered">
       {#each tabs as [href, title]}
         <a
           {href}
@@ -26,21 +23,42 @@
         >
       {/each}
     </div>
-    <p class="prose mt-4">
-      A project by <a href="https://twitter.com/kisaragi_hiu" target="_blank"
-        >@kisaragi_hiu</a
-      >
-      —
-      <a href="https://www.buymeacoffee.com/kisaragihiu" target="_blank"
-        >help pay for my rent</a
-      >
-    </p>
-    <p class="prose my-4 text-xs">
-      <a href="https://github.com/changelog-db/changelog-db">Built with</a>{" "}
-      Tailwind CSS, daisyUI, and SvelteKit.
-    </p>
   </div>
-  <div>
+</div>
+<main
+  class={clsx(
+    "mx-auto my-4 w-[95%] max-w-[60rem]",
+    "lg:my-16 lg:flex lg:gap-x-4 lg:[&>div]:min-w-0",
+  )}
+>
+  <div class="max-lg:hidden lg:w-1/4">
+    <div class="prose text-sm">
+      <h1>ChangelogDB</h1>
+      <p>The missing changelog field in package.json.</p>
+      <p>
+        PyPI has it, and it's great! The JavaScript ecosystem should have it as
+        well.
+      </p>
+      <p>
+        For now, here's a package changelog index. <a
+          href="https://github.com/changelog-db/changelog-db/blob/-/changelog-db.data"
+          target="_blank">Manually collected</a
+        >
+        (semi-automated with Emacs), best-effort, hopefully saves some time.
+      </p>
+      <p class="mt-6">
+        By <a href="https://kisaragi-hiu.com" target="_blank">@kisaragi_hiu</a
+        >.<br />
+        <a href="https://www.buymeacoffee.com/kisaragihiu" target="_blank"
+          >Buy me a meal</a
+        >.
+      </p>
+      <p class="mt-6">
+        <a href="https://github.com/changelog-db/changelog-db">Source code</a>.
+      </p>
+    </div>
+  </div>
+  <div class="lg:w-3/4">
     <slot />
   </div>
 </main>

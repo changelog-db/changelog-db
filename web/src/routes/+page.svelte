@@ -1,4 +1,137 @@
 <script lang="ts">
+  import LogoNpm from "carbon-icons-svelte/lib/LogoNpm.svelte";
+  import Delete from "carbon-icons-svelte/lib/Delete.svelte";
+  import clsx from "clsx";
+  import { browser } from "$app/environment";
+  import { currentPage } from "$lib/stores";
+  import { load, dump } from "$lib/parser";
+  import { safeMatch } from "$lib/helpers";
+  import { page } from "$app/stores";
+  import { addCustom, removeCustom, getCustom, setCustom } from "$lib/local";
+  import Pages from "$lib/Pages.svelte";
+
+  import rawData from "$lib/../../../changelog-db.data?raw";
+  const importedData = load(rawData);
+
+  let customData = getCustom();
+  $: dataMap = new Map([...importedData, ...customData]);
+  $: data = [...dataMap];
+
+  const url = $page.url;
+  let rawInput = url.searchParams.get("q") || "";
+
+  $: {
+    if (
+      url.searchParams.get("q") !== rawInput &&
+      typeof history !== "undefined"
+    ) {
+      if (rawInput === "") {
+        url.searchParams.delete("q");
+      } else {
+        url.searchParams.set("q", rawInput);
+      }
+      history.replaceState(null, "", url);
+    }
+  }
+  $: searchInput = rawInput.trim();
+  $: tokens = searchInput.split(/\s+/);
+  $: filtered = data
+    .map((entry) => {
+      const pkg = entry[0];
+      const url = entry[1];
+      let matchType: string | null = null;
+      if (tokens.every((token) => safeMatch(pkg, token))) {
+        matchType = "pkg";
+      } else if (
+        tokens.every((token) => safeMatch(url?.toLowerCase() || "none", token))
+      ) {
+        matchType = "url";
+      } else {
+        matchType = null;
+      }
+      // Without the as it'd get typed as Array<string | null> even
+      // though the first element cannot be null
+      return [pkg, url, matchType] as [string, string | null, string | null];
+    })
+    .filter(([_pkg, _url, matchType]) => matchType)
+    .sort(([aPkg, _aUrl, aMatchType], [bPkg, _bUrl, bMatchType]) => {
+      // Put pkg prefix matches first
+      if (searchInput.length > 0) {
+        const a = aPkg.startsWith(searchInput);
+        const b = bPkg.startsWith(searchInput);
+        if (a && !b) return -1;
+        if (b && !a) return 1;
+      }
+      // Then custom entries
+      {
+        const a = customData.has(aPkg);
+        const b = customData.has(bPkg);
+        if (a && !b) return -1;
+        if (b && !a) return 1;
+      }
+      // Put pkg matches before url matches
+      {
+        const a = aMatchType === "pkg";
+        const b = bMatchType === "pkg";
+        if (a && !b) return -1;
+        if (b && !a) return 1;
+      }
+      return aPkg < bPkg ? -1 : 1;
+    });
+
+  const pageSize = 50;
+  $: maxPage = Math.max(1, Math.ceil(filtered.length / pageSize));
+  $: pageStart = pageSize * ($currentPage - 1);
+  $: pageEnd = pageSize * $currentPage;
+  // Reset page to 1 when `filtered` changes
+  $: filtered, ($currentPage = 1);
+
+  function deleteEntryHandler(pkg: string, url: string | null) {
+    const pkgInput = document.getElementById("pkgInput") as HTMLInputElement;
+    const urlInput = document.getElementById("urlInput") as HTMLInputElement;
+    removeCustom(pkg, customData);
+    // Notify Svelte to update
+    customData = customData;
+    pkgInput.value = pkg;
+    urlInput.value = url || ""; // empty URL input also means none
+  }
+
+  function addEntryHandler() {
+    const pkgInput = document.getElementById("pkgInput") as HTMLInputElement;
+    const urlInput = document.getElementById("urlInput") as HTMLInputElement;
+    const pkgValue = pkgInput.value.trim();
+    const urlValue = urlInput.value.trim();
+    let url: string | null = null;
+    if (urlValue !== "") {
+      url = urlValue;
+    }
+    if (pkgValue === "") {
+      pkgInput.classList.add("input-error");
+      return;
+    }
+    pkgInput.classList.remove("input-error");
+    addCustom(pkgValue, url, customData);
+    // Notify Svelte to update
+    customData = customData;
+    // Clear the fields
+    pkgInput.value = "";
+    urlInput.value = "";
+  }
+
+  function removeDupEntriesHandler() {
+    let duplicates: Set<string> = new Set();
+    for (const [key, _value] of customData) {
+      if (importedData.has(key)) {
+        duplicates.add(key);
+      }
+    }
+    for (const dup of duplicates) {
+      customData.delete(dup);
+    }
+    // Notify Svelte to update
+    customData = customData;
+    setCustom(customData);
+  }
 </script>
 
 <svelte:head>
@@ -38,17 +171,142 @@
   />
 </svelte:head>
 
-<div class="prose">
-  <p>The missing changelog field in package.json.</p>
-  <p>
-    PyPI has it, and it's great! The JavaScript ecosystem should have it as
-    well.
-  </p>
-  <p>
-    For now, here's a package changelog index. <a
-      href="https://github.com/changelog-db/changelog-db/blob/-/changelog-db.data"
-      target="_blank">Manually collected</a
-    >
-    (semi-automated with Emacs), best-effort, hopefully saves some time.
-  </p>
-</div>
+<input
+  type="search"
+  placeholder={browser ? `Search ${data.length} entries` : "Loading"}
+  class={clsx(
+    "input input-bordered my-4 w-full transition",
+    browser || "animate-pulse",
+  )}
+  bind:value={rawInput}
+  disabled={!browser}
+/>
+{#if filtered.length > 0}
+  <Pages {maxPage} />
+  {#if filtered.length !== data.length}
+    <h2 class="-mt-2 text-center font-bold">{filtered.length} matches</h2>
+  {/if}
+  <ul id="list" class="divide-y divide-neutral/20">
+    {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
+      {@const isCustom = customData.has(pkg)}
+      <li class="flex h-12 w-full items-center space-x-1">
+        <a
+          class={`link flex h-full ${
+            isCustom ? "w-10/12" : "w-11/12"
+          } items-center truncate`}
+          target="_blank"
+          href={url || `https://npmjs.com/package/${pkg}`}
+          title={url ? undefined : "No changelog found"}
+        >
+          <span class="truncate"
+            >{pkg} <span class="opacity-75">({url || "none"})</span></span
+          >
+        </a>
+        {#if isCustom}
+          <button
+            title="Delete custom entry"
+            class="link h-full w-1/12"
+            on:click={() => deleteEntryHandler(pkg, url)}
+            ><Delete size={24} /></button
+          >
+        {/if}
+        <a
+          class="link flex h-full w-1/12 items-center text-center"
+          href="https://npmjs.com/package/{pkg}"
+          target="_blank"
+        >
+          <span>
+            <LogoNpm title="View {pkg} on npm" size={32} />
+          </span>
+        </a>
+      </li>
+    {/each}
+  </ul>
+  <Pages {maxPage} />
+{:else}
+  <div class="my-4 space-y-2 text-center text-neutral">
+    <h2 class="text-2xl font-bold">No matches!</h2>
+    <div>
+      Search for <code class="text-primary-focus">{searchInput}</code> on:
+    </div>
+    <ul class="space-y-2">
+      <li>
+        <a
+          class="out text-secondary-focus link"
+          target="_blank"
+          href="https://www.google.com/search?q={searchInput}">Google</a
+        >
+      </li>
+      <li>
+        <a
+          class="out text-secondary-focus link"
+          target="_blank"
+          href="https://www.npmjs.com/search?q={searchInput}">npm</a
+        >
+      </li>
+    </ul>
+  </div>
+{/if}
+
+{#if browser}
+  <div>
+    <form on:submit|preventDefault={addEntryHandler} class="pl-1">
+      <div class="prose">
+        <h3 class="font-bold">Add a custom entry</h3>
+        <p>
+          Custom entries are saved in localStorage and take precedence over
+          default entries.
+        </p>
+      </div>
+      <div
+        class={clsx(
+          "flex flex-wrap items-end",
+          "[&_.label]:flex-col [&_.label]:items-start",
+          "[&_.label]:gap-1 [&_.label]:pl-0",
+          "[&_.input]:input-bordered",
+        )}
+      >
+        <label for="pkgInput" class="label">
+          <span class="label-text">Package name</span>
+          <input id="pkgInput" type="text" placeholder="abc" class="input" />
+        </label>
+        <label for="urlInput" class="label">
+          <span class="label-text">Changelog URL</span>
+          <input
+            id="urlInput"
+            type="text"
+            placeholder="https://example.com"
+            class="input"
+          />
+        </label>
+      </div>
+      <button class="btn">Add entry</button>
+    </form>
+    <div class="pl-1">
+      <div class="prose">
+        <p>
+          When new entries are added, it may be desirable to remove custom
+          entries that are currently shadowing built-in entries.
+        </p>
+      </div>
+      <button class="btn" on:click={removeDupEntriesHandler}
+        >Remove duplicate entries</button
+      >
+    </div>
+    <div class="prose mt-4">
+      <h3 class="font-bold">Import/Export</h3>
+      <p>
+        Right now this is a rudimentary version that copies the exported text to
+        the clipboard.
+      </p>
+      <button
+        class="btn"
+        on:click={() => {
+          const value = dump(customData);
+          navigator.clipboard.writeText(value);
+          console.log(value);
+        }}>Export</button
+      >
+    </div>
+  </div>
+{/if}
