@@ -229,17 +229,17 @@
     <div>
       Search for <code class="text-primary-focus">{searchInput}</code> on:
     </div>
-    <ul class="space-y-2">
+    <ul class="prose space-y-2">
       <li>
         <a
-          class="out text-secondary-focus link"
+          class="out text-secondary-focus"
           target="_blank"
           href="https://www.google.com/search?q={searchInput}">Google</a
         >
       </li>
       <li>
         <a
-          class="out text-secondary-focus link"
+          class="out text-secondary-focus"
           target="_blank"
           href="https://www.npmjs.com/search?q={searchInput}">npm</a
         >

@@ -16,7 +16,7 @@
   }
   .link {
     @apply no-underline;
-    @apply transition duration-100 hover:opacity-60;
+    @apply hover:underline;
   }
   .btn {
     @apply no-animation;
