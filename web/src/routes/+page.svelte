@@ -205,7 +205,7 @@
     placeholder={browser ? `Search ${data.length} entries` : "Loading"}
     class={clsx(
       "input input-bordered my-4 w-full transition",
-      browser || "animate-pulse"
+      browser || "animate-pulse",
     )}
     bind:value={rawInput}
     disabled={!browser}
@@ -292,7 +292,7 @@
             "flex flex-wrap items-end",
             "[&_.label]:flex-col [&_.label]:items-start",
             "[&_.label]:gap-1 [&_.label]:pl-0",
-            "[&_.input]:input-bordered"
+            "[&_.input]:input-bordered",
           )}
         >
           <label for="pkgInput" class="label">

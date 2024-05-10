@@ -18,7 +18,7 @@ export function getCustom(): CustomData {
 export function setCustom(map: CustomData) {
   localStorage.setItem(
     "changelog-db-custom",
-    JSON.stringify(Object.fromEntries(map))
+    JSON.stringify(Object.fromEntries(map)),
   );
 }
 
