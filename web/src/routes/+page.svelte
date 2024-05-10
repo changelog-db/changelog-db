@@ -285,12 +285,12 @@
     <div class="pl-1">
       <div class="prose">
         <p>
-          When new entries are added, it may be desirable to remove custom
+          After an update adds new entries, it may be desirable to remove custom
           entries that are currently shadowing built-in entries.
         </p>
       </div>
       <button class="btn" on:click={removeDupEntriesHandler}
-        >Remove duplicate entries</button
+        >Remove shadowing entries</button
       >
     </div>
     <div class="prose mt-4">
