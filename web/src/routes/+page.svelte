@@ -141,7 +141,7 @@
   <meta name="title" content="ChangelogDB" />
   <meta
     name="description"
-    content="An npm registry package changelog index. Manually collected, best-effort, hopefully saves some time."
+    content="An npm registry package changelog index, providing links to JavaScript package changelogs. Manually collected, best-effort, hopefully saves some time."
   />
 
   <!-- Open Graph / Facebook -->
@@ -154,7 +154,7 @@
   <meta property="og:title" content="ChangelogDB" />
   <meta
     property="og:description"
-    content="An npm registry package changelog index. Manually collected, best-effort, hopefully saves some time."
+    content="An npm registry package changelog index, providing links to JavaScript package changelogs. Manually collected, best-effort, hopefully saves some time."
   />
 
   <!-- Twitter -->
@@ -168,7 +168,7 @@
   <meta property="twitter:title" content="ChangelogDB" />
   <meta
     property="twitter:description"
-    content="An npm registry package changelog index. Manually collected, best-effort, hopefully saves some time."
+    content="An npm registry package changelog index, providing links to JavaScript package changelogs. Manually collected, best-effort, hopefully saves some time."
   />
 </svelte:head>
 
