@@ -171,7 +171,7 @@
   />
 </svelte:head>
 
-<main class="mx-auto my-16 w-[95%] max-w-[40rem]">
+
   <div class="prose">
     <h1>ChangelogDB</h1>
     <p>The missing changelog field in package.json.</p>
@@ -339,4 +339,3 @@
       </div>
     </div>
   {/if}
-</main>
