@@ -171,171 +171,170 @@
   />
 </svelte:head>
 
-
-  <div class="prose">
-    <h1>ChangelogDB</h1>
-    <p>The missing changelog field in package.json.</p>
-    <p>
-      PyPI has it, and it's great! The JavaScript ecosystem should have it as
-      well.
-    </p>
-    <p>
-      For now, here's a package changelog index. <a
-        href="https://github.com/changelog-db/changelog-db/blob/-/changelog-db.data"
-        target="_blank">Manually collected</a
-      >
-      (semi-automated with Emacs), best-effort, hopefully saves some time.
-    </p>
-  </div>
-  <p class="prose mt-4">
-    A project by <a href="https://twitter.com/kisaragi_hiu" target="_blank"
-      >@kisaragi_hiu</a
-    >
-    —
-    <a href="https://www.buymeacoffee.com/kisaragihiu" target="_blank"
-      >help pay for my rent</a
-    >
+<div class="prose">
+  <h1>ChangelogDB</h1>
+  <p>The missing changelog field in package.json.</p>
+  <p>
+    PyPI has it, and it's great! The JavaScript ecosystem should have it as
+    well.
   </p>
-  <p class="prose my-4 text-xs">
-    <a href="https://github.com/changelog-db/changelog-db">Built with</a>{" "}
-    Tailwind CSS, daisyUI, and SvelteKit.
+  <p>
+    For now, here's a package changelog index. <a
+      href="https://github.com/changelog-db/changelog-db/blob/-/changelog-db.data"
+      target="_blank">Manually collected</a
+    >
+    (semi-automated with Emacs), best-effort, hopefully saves some time.
   </p>
-  <input
-    type="search"
-    placeholder={browser ? `Search ${data.length} entries` : "Loading"}
-    class={clsx(
-      "input input-bordered my-4 w-full transition",
-      browser || "animate-pulse",
-    )}
-    bind:value={rawInput}
-    disabled={!browser}
-  />
-  {#if filtered.length > 0}
-    <Pages {maxPage} />
-    {#if filtered.length !== data.length}
-      <h2 class="-mt-2 text-center font-bold">{filtered.length} matches</h2>
-    {/if}
-    <ul id="list" class="divide-y divide-neutral/20">
-      {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
-        {@const isCustom = customData.has(pkg)}
-        <li class="flex h-12 w-full items-center space-x-1">
-          <a
-            class={`link flex h-full ${
-              isCustom ? "w-10/12" : "w-11/12"
-            } items-center truncate`}
-            target="_blank"
-            href={url || `https://npmjs.com/package/${pkg}`}
-            title={url ? undefined : "No changelog found"}
-          >
-            <span class="truncate"
-              >{pkg} <span class="opacity-75">({url || "none"})</span></span
-            >
-          </a>
-          {#if isCustom}
-            <button
-              title="Delete custom entry"
-              class="link h-full w-1/12"
-              on:click={() => deleteEntryHandler(pkg, url)}
-              ><Delete size={24} /></button
-            >
-          {/if}
-          <a
-            class="link flex h-full w-1/12 items-center text-center"
-            href="https://npmjs.com/package/{pkg}"
-            target="_blank"
-          >
-            <span>
-              <LogoNpm title="View {pkg} on npm" size={32} />
-            </span>
-          </a>
-        </li>
-      {/each}
-    </ul>
-    <Pages {maxPage} />
-  {:else}
-    <div class="my-4 space-y-2 text-center text-neutral">
-      <h2 class="text-2xl font-bold">No matches!</h2>
-      <div>
-        Search for <code class="text-primary-focus">{searchInput}</code> on:
-      </div>
-      <ul class="space-y-2">
-        <li>
-          <a
-            class="out text-secondary-focus link"
-            target="_blank"
-            href="https://www.google.com/search?q={searchInput}">Google</a
-          >
-        </li>
-        <li>
-          <a
-            class="out text-secondary-focus link"
-            target="_blank"
-            href="https://www.npmjs.com/search?q={searchInput}">npm</a
-          >
-        </li>
-      </ul>
-    </div>
+</div>
+<p class="prose mt-4">
+  A project by <a href="https://twitter.com/kisaragi_hiu" target="_blank"
+    >@kisaragi_hiu</a
+  >
+  —
+  <a href="https://www.buymeacoffee.com/kisaragihiu" target="_blank"
+    >help pay for my rent</a
+  >
+</p>
+<p class="prose my-4 text-xs">
+  <a href="https://github.com/changelog-db/changelog-db">Built with</a>{" "}
+  Tailwind CSS, daisyUI, and SvelteKit.
+</p>
+<input
+  type="search"
+  placeholder={browser ? `Search ${data.length} entries` : "Loading"}
+  class={clsx(
+    "input input-bordered my-4 w-full transition",
+    browser || "animate-pulse",
+  )}
+  bind:value={rawInput}
+  disabled={!browser}
+/>
+{#if filtered.length > 0}
+  <Pages {maxPage} />
+  {#if filtered.length !== data.length}
+    <h2 class="-mt-2 text-center font-bold">{filtered.length} matches</h2>
   {/if}
-
-  {#if browser}
+  <ul id="list" class="divide-y divide-neutral/20">
+    {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
+      {@const isCustom = customData.has(pkg)}
+      <li class="flex h-12 w-full items-center space-x-1">
+        <a
+          class={`link flex h-full ${
+            isCustom ? "w-10/12" : "w-11/12"
+          } items-center truncate`}
+          target="_blank"
+          href={url || `https://npmjs.com/package/${pkg}`}
+          title={url ? undefined : "No changelog found"}
+        >
+          <span class="truncate"
+            >{pkg} <span class="opacity-75">({url || "none"})</span></span
+          >
+        </a>
+        {#if isCustom}
+          <button
+            title="Delete custom entry"
+            class="link h-full w-1/12"
+            on:click={() => deleteEntryHandler(pkg, url)}
+            ><Delete size={24} /></button
+          >
+        {/if}
+        <a
+          class="link flex h-full w-1/12 items-center text-center"
+          href="https://npmjs.com/package/{pkg}"
+          target="_blank"
+        >
+          <span>
+            <LogoNpm title="View {pkg} on npm" size={32} />
+          </span>
+        </a>
+      </li>
+    {/each}
+  </ul>
+  <Pages {maxPage} />
+{:else}
+  <div class="my-4 space-y-2 text-center text-neutral">
+    <h2 class="text-2xl font-bold">No matches!</h2>
     <div>
-      <form on:submit|preventDefault={addEntryHandler} class="pl-1">
-        <div class="prose">
-          <h3 class="font-bold">Add a custom entry</h3>
-          <p>
-            Custom entries are saved in localStorage and take precedence over
-            default entries.
-          </p>
-        </div>
-        <div
-          class={clsx(
-            "flex flex-wrap items-end",
-            "[&_.label]:flex-col [&_.label]:items-start",
-            "[&_.label]:gap-1 [&_.label]:pl-0",
-            "[&_.input]:input-bordered",
-          )}
-        >
-          <label for="pkgInput" class="label">
-            <span class="label-text">Package name</span>
-            <input id="pkgInput" type="text" placeholder="abc" class="input" />
-          </label>
-          <label for="urlInput" class="label">
-            <span class="label-text">Changelog URL</span>
-            <input
-              id="urlInput"
-              type="text"
-              placeholder="https://example.com"
-              class="input"
-            />
-          </label>
-        </div>
-        <button class="btn">Add entry</button>
-      </form>
-      <div class="pl-1">
-        <div class="prose">
-          <p>
-            When new entries are added, it may be desirable to remove custom
-            entries that are currently shadowing built-in entries.
-          </p>
-        </div>
-        <button class="btn" on:click={removeDupEntriesHandler}
-          >Remove duplicate entries</button
-        >
-      </div>
-      <div class="prose mt-4">
-        <h3 class="font-bold">Import/Export</h3>
-        <p>
-          Right now this is a rudimentary version that copies the exported text
-          to the clipboard.
-        </p>
-        <button
-          class="btn"
-          on:click={() => {
-            const value = dump(customData);
-            navigator.clipboard.writeText(value);
-            console.log(value);
-          }}>Export</button
-        >
-      </div>
+      Search for <code class="text-primary-focus">{searchInput}</code> on:
     </div>
-  {/if}
+    <ul class="space-y-2">
+      <li>
+        <a
+          class="out text-secondary-focus link"
+          target="_blank"
+          href="https://www.google.com/search?q={searchInput}">Google</a
+        >
+      </li>
+      <li>
+        <a
+          class="out text-secondary-focus link"
+          target="_blank"
+          href="https://www.npmjs.com/search?q={searchInput}">npm</a
+        >
+      </li>
+    </ul>
+  </div>
+{/if}
+
+{#if browser}
+  <div>
+    <form on:submit|preventDefault={addEntryHandler} class="pl-1">
+      <div class="prose">
+        <h3 class="font-bold">Add a custom entry</h3>
+        <p>
+          Custom entries are saved in localStorage and take precedence over
+          default entries.
+        </p>
+      </div>
+      <div
+        class={clsx(
+          "flex flex-wrap items-end",
+          "[&_.label]:flex-col [&_.label]:items-start",
+          "[&_.label]:gap-1 [&_.label]:pl-0",
+          "[&_.input]:input-bordered",
+        )}
+      >
+        <label for="pkgInput" class="label">
+          <span class="label-text">Package name</span>
+          <input id="pkgInput" type="text" placeholder="abc" class="input" />
+        </label>
+        <label for="urlInput" class="label">
+          <span class="label-text">Changelog URL</span>
+          <input
+            id="urlInput"
+            type="text"
+            placeholder="https://example.com"
+            class="input"
+          />
+        </label>
+      </div>
+      <button class="btn">Add entry</button>
+    </form>
+    <div class="pl-1">
+      <div class="prose">
+        <p>
+          When new entries are added, it may be desirable to remove custom
+          entries that are currently shadowing built-in entries.
+        </p>
+      </div>
+      <button class="btn" on:click={removeDupEntriesHandler}
+        >Remove duplicate entries</button
+      >
+    </div>
+    <div class="prose mt-4">
+      <h3 class="font-bold">Import/Export</h3>
+      <p>
+        Right now this is a rudimentary version that copies the exported text to
+        the clipboard.
+      </p>
+      <button
+        class="btn"
+        on:click={() => {
+          const value = dump(customData);
+          navigator.clipboard.writeText(value);
+          console.log(value);
+        }}>Export</button
+      >
+    </div>
+  </div>
+{/if}
