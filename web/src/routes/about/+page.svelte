@@ -60,53 +60,5 @@
     effort.
   </p>
   <h2>Why manually collect</h2>
-  <p>
-    Despite changelog conventions being somewhat regular, it is not actually
-    possible to reliably predict where a project puts its changelogs (if it does
-    provide it) without projects declaring this information themselves.
-  </p>
-  <ul>
-    <li>
-      File name differences: <code>/HISTORY.md</code>,
-      <code>/CHANGELOG.md</code>, changelogs that aren't in Markdown like
-      <code>/CHANGELOG.org</code>, upper case / lower case differences. The
-      convention is to use <code>CHANGELOG.md</code>.
-      <b
-        >To determine this reliably would require a full copy of the project
-        source code.</b
-      >
-    </li>
-    <li>
-      File location differences, especially in a monorepo: the path of a project
-      within a monorepo is not predictable. The repository URL is also
-      arbitrary, but projects declare it in package.json — the path does not
-      have this luxary. The convention is to put subprojects in <code
-        >/packages/[any category if necessary]/&lt;package-name&gt;</code
-      >, but (a) the path is still unpredictable, and (b) many projects don't
-      have a 1-to-1 mapping between the package name and its corresponding
-      directory name.
-      <b
-        >To figure this out reliably also requires a full copy of the project
-        source code.</b
-      >
-    </li>
-    <li>
-      Changelog file or Releases: some projects write their changelog in a
-      dedicated file, some write it in the GitHub Release message; many do both.
-      For monorepos, a changelog file is often better as GitHub Release's search
-      function is… quite bad; but sometimes the changelog file isn't desirable,
-      for instance because the file is too big to be rendered by GitHub, or
-      because the project has branched and has multiple changelogs (like <a
-        href="https://github.com/sveltejs/svelte/blob/f70c0370be345b051c1144473378207b6c08143b/packages/svelte/CHANGELOG.md"
-        rel="noreferrer noopener"
-        target="_blank">Svelte 5</a
-      >
-      and
-      <a
-        href="https://github.com/sveltejs/svelte/blob/f70c0370be345b051c1144473378207b6c08143b/packages/svelte/CHANGELOG-pre-5.md"
-        rel="noreferrer noopener"
-        target="_blank">Svelte 4</a
-      > as of 2024-05-10).
-    </li>
-  </ul>
+  <a href="/why-manual">See this post</a>.
 </div>
