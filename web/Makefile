@@ -1,4 +1,4 @@
-.PHONY: build
+.PHONY: build preview dev fmt fmt.check check check.watch
 build:
 	npx vite build
 	npx size-limit
@@ -6,7 +6,7 @@ build:
 preview: build
 	npx sirv build
 
-dev:
+dev: node_modules
 	npx svelte-kit sync
 	npx vite dev
 
