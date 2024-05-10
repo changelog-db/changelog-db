@@ -52,16 +52,3 @@
     (semi-automated with Emacs), best-effort, hopefully saves some time.
   </p>
 </div>
-<p class="prose mt-4">
-  A project by <a href="https://twitter.com/kisaragi_hiu" target="_blank"
-    >@kisaragi_hiu</a
-  >
-  —
-  <a href="https://www.buymeacoffee.com/kisaragihiu" target="_blank"
-    >help pay for my rent</a
-  >
-</p>
-<p class="prose my-4 text-xs">
-  <a href="https://github.com/changelog-db/changelog-db">Built with</a>{" "}
-  Tailwind CSS, daisyUI, and SvelteKit.
-</p>
