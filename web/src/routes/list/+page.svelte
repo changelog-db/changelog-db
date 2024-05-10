@@ -8,9 +8,9 @@
   import { safeMatch } from "$lib/helpers";
   import { page } from "$app/stores";
   import { addCustom, removeCustom, getCustom, setCustom } from "$lib/local";
-  import Pages from "./Pages.svelte";
+  import Pages from "$lib/Pages.svelte";
 
-  import rawData from "../../../changelog-db.data?raw";
+  import rawData from "$lib/../../../changelog-db.data?raw";
   const importedData = load(rawData);
 
   let customData = getCustom();
