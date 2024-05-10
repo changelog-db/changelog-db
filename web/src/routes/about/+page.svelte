@@ -30,6 +30,7 @@
 </svelte:head>
 
 <div class="prose mb-8">
+  <h1>About</h1>
   <p>
     ChangelogDB makes it less painful to read changelogs before upgrading your
     JavaScript dependencies. <a
