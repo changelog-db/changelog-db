@@ -1,6 +1,7 @@
 <script lang="ts">
   import LogoNpm from "carbon-icons-svelte/lib/LogoNpm.svelte";
   import Delete from "carbon-icons-svelte/lib/Delete.svelte";
+  import Out from "$lib/Out.svelte";
   import clsx from "clsx";
   import { browser } from "$app/environment";
   import { currentPage } from "$lib/stores";
@@ -235,23 +236,21 @@
 {:else}
   <div class="my-4 space-y-2 text-center text-base-content">
     <h2 class="text-2xl font-bold">No matches!</h2>
-    <div>
+    <p>Some options to try:</p>
+    <ul class="prose space-y-2">
+      <li>TODO :repo/releases (GitHub, Gitea, Forgejo)</li>
+      <li>TODO :repo/-/releases (GitLab)</li>
+      <li>TODO :repo/refs (Sourcehut)</li>
+    </ul>
+    <p>
       Search for <code class="text-primary-focus">{searchInput}</code> on:
-    </div>
+    </p>
     <ul class="prose space-y-2">
       <li>
-        <a
-          class="out text-secondary-focus"
-          target="_blank"
-          href="https://www.google.com/search?q={searchInput}">Google</a
-        >
+        <Out href="https://www.google.com/search?q={searchInput}">Google</Out>
       </li>
       <li>
-        <a
-          class="out text-secondary-focus"
-          target="_blank"
-          href="https://www.npmjs.com/search?q={searchInput}">npm</a
-        >
+        <Out href="https://www.npmjs.com/search?q={searchInput}">npm</Out>
       </li>
     </ul>
   </div>
