@@ -171,16 +171,25 @@
   />
 </svelte:head>
 
-<input
-  type="search"
-  placeholder={browser ? `Search ${data.length} entries` : "Loading"}
-  class={clsx(
-    "input input-bordered my-4 w-full transition",
-    browser || "animate-pulse",
-  )}
-  bind:value={rawInput}
-  disabled={!browser}
-/>
+<div class="flex items-center gap-x-2">
+  <input
+    type="search"
+    placeholder={browser ? `Search ${data.length} entries` : "Loading"}
+    class={clsx(
+      "input input-bordered my-4 w-full flex-grow transition",
+      browser || "animate-pulse",
+    )}
+    bind:value={rawInput}
+    disabled={!browser}
+  />
+  <button
+    title="Clear search field"
+    class="btn flex-none"
+    on:click={() => {
+      rawInput = "";
+    }}><Delete size={24} /></button
+  >
+</div>
 {#if filtered.length > 0}
   <Pages {maxPage} />
   {#if filtered.length !== data.length}
