@@ -181,7 +181,7 @@
     </p>
     <p>
       For now, here's a package changelog index. <a
-        href="https://github.com/changelog-db/changelog-db/blob/-/changelog-db.yaml"
+        href="https://github.com/changelog-db/changelog-db/blob/-/changelog-db.data"
         target="_blank">Manually collected</a
       >
       (semi-automated with Emacs), best-effort, hopefully saves some time.
@@ -261,14 +261,14 @@
       <ul class="space-y-2">
         <li>
           <a
-            class="out link text-secondary-focus"
+            class="out text-secondary-focus link"
             target="_blank"
             href="https://www.google.com/search?q={searchInput}">Google</a
           >
         </li>
         <li>
           <a
-            class="out link text-secondary-focus"
+            class="out text-secondary-focus link"
             target="_blank"
             href="https://www.npmjs.com/search?q={searchInput}">npm</a
           >
