@@ -23,6 +23,7 @@ export default {
     // output of prettier-plugin-tailwindcss.
     // Surely it should be printing to stderr?
     logs: false,
+    darkTheme: "night",
     themes: ["emerald", "night"],
   },
 };
