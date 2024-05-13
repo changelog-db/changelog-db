@@ -212,7 +212,7 @@
           title={url ? undefined : "No changelog found"}
         >
           <span class="truncate"
-            >{pkg} <span class="opacity-75">({isDeprecated && "deprecated"}{url || "none"})</span></span
+            >{pkg} <span class="opacity-75">({isDeprecated ? "deprecated; " : ""}{url || "none"})</span></span
           >
         </a>
         {#if isCustom}
