@@ -87,7 +87,7 @@
   // Reset page to 1 when `filtered` changes
   $: filtered, ($currentPage = 1);
 
-  function deleteEntryHandler(pkg: string, url: string | null) {
+  function deleteEntryHandler(pkg: string, url: string | undefined) {
     const pkgInput = document.getElementById("pkgInput") as HTMLInputElement;
     const urlInput = document.getElementById("urlInput") as HTMLInputElement;
     removeCustom(pkg, customData);
@@ -197,8 +197,11 @@
     <h2 class="-mt-2 text-center font-bold">{filtered.length} matches</h2>
   {/if}
   <ul id="list" class="divide-y divide-neutral/20">
-    {#each filtered.slice(pageStart, pageEnd) as [pkg, url] (pkg)}
+    {#each filtered.slice(pageStart, pageEnd) as [pkg, rawUrl] (pkg)}
       {@const isCustom = customData.has(pkg)}
+      {@const isDeprecated = rawUrl?.startsWith("dep:")}
+      <!-- Replace just once -->
+      {@const url = rawUrl?.replace("dep:", "")}
       <li class="flex h-12 w-full items-center space-x-1">
         <a
           class={`link flex h-full ${
@@ -209,7 +212,7 @@
           title={url ? undefined : "No changelog found"}
         >
           <span class="truncate"
-            >{pkg} <span class="opacity-75">({url || "none"})</span></span
+            >{pkg} <span class="opacity-75">({isDeprecated && "deprecated"}{url || "none"})</span></span
           >
         </a>
         {#if isCustom}
