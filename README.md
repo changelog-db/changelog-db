@@ -21,6 +21,10 @@ Each line is an entry.
   - npm: no prefix
   - Browser extensions: `ext`
   - JSR: `jsr`
+- url is the url to the changelog. As a special case, deprecated packages are marked as
+  - `dep:<url>`
+  - Where the URL is something to read about the deprecation.
+
 
 ## Roadmap
 
