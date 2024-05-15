@@ -32,7 +32,7 @@
 
 <div class="prose mb-8">
   <h1>About</h1>
-  <Out href="https://www.patreon.com/kisaragihiu" class="btn">Donate</Out>
+  <Out href="https://www.patreon.com/kisaragihiu" class="btn btn-outline w-full">Donate</Out>
   <p><Out href="https://github.com/changelog-db/changelog-db">Source code</Out></p>
   <p>
     ChangelogDB makes it less painful to read changelogs before upgrading your
