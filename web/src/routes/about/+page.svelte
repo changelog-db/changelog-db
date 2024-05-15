@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Out from "$lib/Out.svelte";
   const priorArt = [
     {
       name: "changelog-view",
@@ -31,6 +32,7 @@
 
 <div class="prose mb-8">
   <h1>About</h1>
+  <p><Out href="https://github.com/changelog-db/changelog-db">Source code</Out></p>
   <p>
     ChangelogDB makes it less painful to read changelogs before upgrading your
     JavaScript dependencies. <a
@@ -62,4 +64,7 @@
   </p>
   <h2>Why manually collect</h2>
   <a href="/why-manual">See this post</a>.
+  <hr/>
+  <h2>About the author</h2>
+  <p>I'm <Out href="https://kisaragi-hiu.com">Kisaragi Hiu</Out>. I sometimes write tools for myself; hopefully they are also useful to others.</p>
 </div>
