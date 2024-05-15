@@ -45,10 +45,8 @@
         <p class="mt-6">
           By <a href="https://kisaragi-hiu.com" target="_blank">@kisaragi_hiu</a
           >.
-          <a href="https://www.buymeacoffee.com/kisaragihiu" target="_blank"
-            >Buy me a meal</a
-          >.
-        </p>
+          <a href="https://www.patreon.com/kisaragihiu" target="_blank"
+            >Donate</a>
         <p class="mt-6">
           <a href="https://github.com/changelog-db/changelog-db">Source code</a
           >.
