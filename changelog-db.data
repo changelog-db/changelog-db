@@ -2236,6 +2236,7 @@
 "shebang-regex": "https://github.com/sindresorhus/shebang-regex/releases"
 "shelljs": "https://github.com/shelljs/shelljs/releases"
 "signal-exit": "https://github.com/tapjs/signal-exit/blob/-/CHANGELOG.md"
+"simple-git": "https://github.com/steveukx/git-js/blob/-/simple-git/CHANGELOG.md"
 "sirv": "https://github.com/lukeed/sirv/releases"
 "sirv-cli": "https://github.com/lukeed/sirv/releases"
 "size-limit": "https://github.com/ai/size-limit/blob/-/CHANGELOG.md"
