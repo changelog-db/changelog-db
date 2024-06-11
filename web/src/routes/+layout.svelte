@@ -15,13 +15,16 @@
 <main class={"mx-auto my-4 w-[95%]"}>
   <div class="navbar">
     <div class="flex-1">
-      <a href="/" class="text-xl hover:underline">ChangelogDB</a>
+      <a href="/"
+         data-sveltekit-reload
+         class="text-xl hover:underline">ChangelogDB</a>
     </div>
     <div class="flex-none lg:hidden">
       <div role="tablist" class="tabs tabs-bordered">
         {#each tabs as [href, title]}
           <a
             {href}
+            data-sveltekit-reload
             role="tab"
             class={href === $page.url.pathname ? "tab tab-active" : "tab"}
             >{title}</a
@@ -35,7 +38,7 @@
       <ul class="menu p-0">
         {#each menu as [href, title]}
           <li>
-            <a {href} class={href === $page.url.pathname ? "active" : undefined}
+            <a {href} data-sveltekit-reload class={href === $page.url.pathname ? "active" : undefined}
               >{title}</a
             >
           </li>
