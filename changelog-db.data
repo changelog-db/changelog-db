@@ -264,6 +264,7 @@
 "@babel/template": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
 "@babel/traverse": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
 "@babel/types": "https://github.com/babel/babel/blob/-/CHANGELOG.md"
+"@biomejs/biome": "https://github.com/biomejs/biome/blob/-/CHANGELOG.md"
 "@builder.io/eslint-plugin-mitosis": "https://github.com/BuilderIO/mitosis/blob/-/packages/eslint-plugin/CHANGELOG.md"
 "@builder.io/html-to-figma": none
 "@builder.io/mitosis": "https://github.com/BuilderIO/mitosis/blob/-/packages/core/CHANGELOG.md"
@@ -2306,6 +2307,7 @@
 "trash-cli": "https://github.com/sindresorhus/trash-cli/releases"
 "tree-kill": "https://github.com/pkrumins/node-tree-kill#changelog"
 "ts-node": "https://github.com/TypeStrong/ts-node/releases"
+"ts-results-es": "https://github.com/lune-climate/ts-results-es/blob/-/CHANGELOG.md"
 "tslib": "https://github.com/microsoft/tslib/releases"
 "tsup": "https://github.com/egoist/tsup/releases"
 "turbo": "https://github.com/vercel/turbo/releases"
